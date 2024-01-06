@@ -1,4 +1,4 @@
-﻿<Page x:Class="SunnyLize.Word.LoginPage"
+﻿<local:BasePage x:Class="SunnyLize.Word.LoginPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -49,7 +49,7 @@
                             <PasswordBox Tag="Password" Margin="0 0 0 30"/>
 
                              <!--Next button we can turn our next button off by writing isEnable = false-->
-                            <Button  Content="Next" HorizontalAlignment="Center"/>
+                            <Button  Content="Next" Click="NextButton_Click" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Border>
 
@@ -58,4 +58,4 @@
             </ScrollViewer>
         </Grid>
     </Border>
-</Page>
+</local:BasePage>
