@@ -46,7 +46,7 @@
                             <TextBox Tag="Email" />
                             
                             <!--Password-->
-                            <TextBox Tag="Passwaord" Margin="0 0 0 30"/>
+                            <PasswordBox Tag="Password" Margin="0 0 0 30"/>
 
                              <!--Next button we can turn our next button off by writing isEnable = false-->
                             <Button  Content="Next" HorizontalAlignment="Center"/>

@@ -4,8 +4,10 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 
+
 namespace SunnyLize.Word
 {
+    
     /// <summary>
     /// View model for the custom flat window
     /// </summary>
@@ -62,7 +64,10 @@ namespace SunnyLize.Word
         {
             get
             {
-                return mWindow.WindowState == WindowState.Maximized ? 0 : mOuterMargineSize;
+                //return mWindow.WindowState == WindowState.Maximized ? 0 : mOuterMargineSize;
+
+                //meaning if it is maximized or docked, then no border
+                return Borderless ? 0 : mOuterMargineSize;
             }
             set
             {
