@@ -1,6 +1,7 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,17 +19,30 @@ namespace SunnyLize.Word
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : BasePage
+    public partial class LoginPage : BasePage<LoginViewModel>, IHavePassword
     {
         public LoginPage()
         {
             InitializeComponent();
+
+            
         }
-        
+        /// <summary>
+        /// The secure password for this login page
+        /// </summary>
+        public SecureString SecurePassword => PasswordText.SecurePassword;
+       
+
+
+
+
+
         //Testing around our animation
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.AniminateOut();
-        }
+        //private void NextButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.AniminateOut();
+        //}
+
+
     }
 }

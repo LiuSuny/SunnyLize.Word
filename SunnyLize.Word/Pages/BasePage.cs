@@ -12,8 +12,17 @@ namespace SunnyLize.Word
     /// <summary>
     /// Base page for all pages to gain base functionality
     /// </summary>
-    public class BasePage: Page
+    public class BasePage<VM>: Page
+        where VM : BaseViewModel, new()
     {
+        #region Private memeber
+        /// <summary>
+        /// View models associated with this page
+        /// </summary>
+        private VM mViewModel { get; set; }
+
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// The animation that play when the page is first loaded
@@ -29,6 +38,24 @@ namespace SunnyLize.Word
         /// the time the animation take to complete
         /// </summary>
         public float SlideSeconds { get; set; } = 0.8f;
+
+        /// <summary>
+        /// View models associated with this page
+        /// </summary>
+        public VM ViewModel 
+        { get { return mViewModel; }
+            set
+            {
+                //if nothing change, return nothing
+                if (mViewModel == value)
+                    return;
+                //otherwise update the value
+                mViewModel = value;
+
+                //set our datacontext to viewmodel on this page
+                this.DataContext = mViewModel;
+            }
+        }
         #endregion
 
         #region Constructor
@@ -43,6 +70,9 @@ namespace SunnyLize.Word
 
             //Listening out for the page loaded
             this.Loaded += BasePage_Loaded;
+
+            //create a default ViewModel
+          this.ViewModel = new VM();
         }
         #endregion
 
@@ -107,23 +137,6 @@ namespace SunnyLize.Word
             switch (this.PageUnLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInOutToLeft:
-
-                    /* Note: we move the following code to seperate classes 
-                    //var sb = new Storyboard();
-                    //var slideAnimation = new ThicknessAnimation
-                    //{
-                    //    Duration = new Duration(TimeSpan.FromSeconds(this.SlideSeconds)),
-                    //    From = new Thickness(this.WindowWidth, 0, -this.WindowWidth, 0),
-                    //    To = new Thickness(0),
-                    //    DecelerationRatio = 0.9f
-                    //};
-                    //Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("Margin"));
-                    //sb.Children.Add(slideAnimation);
-                    //sb.Begin(this);
-
-                    //this.Visibility = Visibility.Visible;
-                    //await Task.Delay((int)(this.SlideSeconds * 1000));
-                    */
 
                     //start the animation
                     await this.SlideAndFadeOutToLeft(this.SlideSeconds); //we can decide to remove the *5 and it will slide in faster
