@@ -10,12 +10,12 @@
       Title="LoginPage">
    
     <!--Our Blue background image-->
-    <Border Background="{StaticResource WordBlueBrush}">
+    <!--<Border Background="{StaticResource WordBlueBrush}" >-->
+    <Border>
         <Grid>
-            <Grid.Background>
-
-                <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500"  ImageSource="/Images/Backgrounds/Emoji-background.png"/>
-            </Grid.Background>
+            <!--<Grid.Background>
+                <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/Emoji-background.png"/>
+            </Grid.Background>-->
             
             <!--Abillity to scroll on our man content pages-->
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

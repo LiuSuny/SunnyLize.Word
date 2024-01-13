@@ -11,7 +11,7 @@
         x:Name="AppWindow"
         Icon="Images/Logo/logo-small.png"
         MinWidth="{Binding WindowMinimiumWidth}"
-        MinHeight="{Binding WindowMinimiumHeight}"
+        MinHeight="{Binding WindowMinimumHeight}"
         Title="Welcome, friend!" Height="600" Width="900">
     <!--next we want to styles our window-->
     <Window.Resources>
@@ -138,11 +138,27 @@
            CornerRadius="0"
           GlassFrameThickness="0"
                       />
-
     </WindowChrome.WindowChrome>
-    <Grid Background="{StaticResource ForegroundLightBrush}" >
-      <!--Next we connect our loginpage window inside our mainwindow form -->
-        <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
 
-    </Grid>
+    <Border Background="{StaticResource WordBlueBrush}" >
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+                <Grid.Background>
+                    <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/Emoji-background.png"/>
+                </Grid.Background>
+       
+      <!--Next we connect our loginpage window inside our mainwindow form -->
+            <Frame Grid.Column="1" x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" Background="Transparent"/>
+
+            <!--Side menu control-->
+            <local:SideMenuControl>
+                
+            </local:SideMenuControl>
+        </Grid>
+    </Border>
 </Window>

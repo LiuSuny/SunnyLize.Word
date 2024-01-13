@@ -109,19 +109,19 @@ namespace SunnyLize.Word
         /// <summary>
         /// The current page login appliaction
         /// </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Chat; //Once we change it ApplicationPage.Login our login animation will appear
 
         #endregion pr
 
         /// <summary>
         /// The smallest width the window can go to when minimizing our window
         /// </summary>
-        public double WindowMinimiumWidth { get; set; } = 400;
+        public double WindowMinimiumWidth { get; set; } = 800;
 
         /// <summary>
         /// The smallest height the window can go to when minimizing our window
         /// </summary>
-        public double WindowMinimumHeight { get; set; } = 400;
+        public double WindowMinimumHeight { get; set; } = 500;
 
 
 
