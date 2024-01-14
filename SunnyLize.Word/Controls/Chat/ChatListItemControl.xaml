@@ -5,31 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SunnyLize.Word"
              mc:Ignorable="d" 
+              Height="100"
              d:DesignHeight="60" d:DesignWidth="300">
-    <Grid Background="{StaticResource ForegroundLightBrush}">
-        <Grid.ColumnDefinitions>
-            <!--New message indicator bar-->
-            <ColumnDefinition Width="Auto"/>
-            
-            <!--Profile picture-->
-            <ColumnDefinition Width="Auto"/>
-            
-            <!--Main contents-->
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+              
+    <UserControl.Resources>
+        <Style x:Key="ContentStyle" TargetType="{x:Type ContentControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <!--Contents-->
+                        <Border x:Name="background" Background="{StaticResource ForegroundLightBrush}">
+                            <Grid x:Name="container" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <!--New message indicator bar-->
+                                <!--<ColumnDefinition Width="Auto"/>-->
 
-        <!--New message indicator bar-->
-        <Border Background="Red" Width="5"/>
+                                <!--Profile picture-->
+                                <ColumnDefinition Width="Auto"/>
 
-            <!--Profile picture-->
-        <Border Grid.Column="1" Padding="8">
-            <!--Profile picture background-->
-            <Border Background="{StaticResource WordBlueBrush}"
-                    Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                    CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                <!--Main contents-->
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--New message indicator bar-->
+                            <Border Background="Red" Width="4"
+                                    HorizontalAlignment="Left"
+                                    Visibility="{Binding NewContentAvailable,
+                                 Converter={local:BooleanToVisibilityConverter}, ConverterParameter=True}"
+                                    />
+
+                            <!--Profile picture-->
+                            <Border Grid.Column="0" Padding="8">
+                                <!--Profile picture background-->
+                                <Border Background="{Binding ProfilePictureRGB, Converter={local:StringRGBToBrushConverter}}"                                   
+                                        Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                      CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     >
-                <!--Profile picture initials-->
-                <TextBlock Text="LM"
+                                    <!--Profile picture initials-->
+                                        <TextBlock Text="{Binding Initials}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Foreground="{StaticResource BackgroundLightBrush}"
@@ -37,12 +50,68 @@
                            FontFamily="{StaticResource LatoRegular}"
                            
                            />
-            </Border>
-            
-        </Border>
-        <!--Main contents of our chat message-->
-        <StackPanel>
-            
-        </StackPanel>
-    </Grid>
+                                </Border>
+
+                            </Border>
+                            <!--Main contents of our chat message-->
+                            <Border Grid.Column="1" Padding="0 0 8 0">
+                                <StackPanel VerticalAlignment="Center">
+                                    <!--This is the name-->
+                                    <TextBlock Text="{Binding Name}" 
+                                    Foreground="{StaticResource WordBlueBrush}"
+                                    TextTrimming="CharacterEllipsis"
+                                    FontFamily="{StaticResource LatoRegular}"
+                                     />
+                                    <!--This is the message-->
+                                    <TextBlock Text="{Binding Message}"
+                                     Foreground="{StaticResource ForegroundDarkBrush}"
+                                     TextTrimming="CharacterEllipsis"
+                                      FontFamily="{StaticResource LatoRegular}"
+                       />
+
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        </Border>
+                        <!--Hover effect-->
+                        <ControlTemplate.Triggers>
+
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="Background" TargetName="background" Value="{StaticResource WordVeryLightBlueBrush}"/>
+                            </DataTrigger>
+                            
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="{StaticResource WordVeryLightBlue}" Duration="0:0:0.3" 
+                                                    Storyboard.TargetName="container" 
+                                                    Storyboard.TargetProperty="Background.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation To="Transparent" Duration="0:0:0.3" 
+                                                    Storyboard.TargetName="container" 
+                                                    Storyboard.TargetProperty="Background.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="container" Value="{StaticResource ForegroundDarkBrush}"/>
+                            </Trigger>
+                           
+                        </ControlTemplate.Triggers>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <ContentControl d:DataContext="{x:Static local:ChatListItemDesignModel.Instance}"
+                    Style="{StaticResource ContentStyle}"/>
+
 </UserControl>
