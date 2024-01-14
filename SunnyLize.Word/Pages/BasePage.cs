@@ -15,6 +15,7 @@ namespace SunnyLize.Word
     public class BasePage<VM>: Page
         where VM : BaseViewModel, new()
     {
+        
         #region Private memeber
         /// <summary>
         /// View models associated with this page

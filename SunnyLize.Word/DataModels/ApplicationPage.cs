@@ -15,5 +15,10 @@ namespace SunnyLize.Word
       /// The main chat page
       /// </summary>
       Chat = 1,
+
+        /// <summary>
+        /// The main Register page
+        /// </summary>
+        Register = 2,
     }
 }

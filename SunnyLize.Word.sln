@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunnyLize.Word", "SunnyLize.Word\SunnyLize.Word.csproj", "{73F29170-C1B0-4448-935E-99A76D71B44A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunnyLize.Word.Core", "Source\SunnyLize.Word.Core\SunnyLize.Word.Core.csproj", "{A87E28C5-4F04-4CB6-819B-8B7373D36DC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{73F29170-C1B0-4448-935E-99A76D71B44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F29170-C1B0-4448-935E-99A76D71B44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F29170-C1B0-4448-935E-99A76D71B44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87E28C5-4F04-4CB6-819B-8B7373D36DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87E28C5-4F04-4CB6-819B-8B7373D36DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87E28C5-4F04-4CB6-819B-8B7373D36DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87E28C5-4F04-4CB6-819B-8B7373D36DC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

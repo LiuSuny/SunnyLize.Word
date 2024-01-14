@@ -59,7 +59,10 @@
                         </StackPanel>
                     </Border>
 
-                    <Button Style="{StaticResource TextButton }" Content="I already have an account" HorizontalAlignment="Center"/>
+                    <Button Style="{StaticResource TextButton }"
+                            Command="{Binding RegisterCommand}"
+                            Content=" Or, create a free account.."
+                            HorizontalAlignment="Center"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

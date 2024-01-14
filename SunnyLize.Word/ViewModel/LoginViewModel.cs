@@ -37,6 +37,10 @@ namespace SunnyLize.Word
         /// </summary>
         public ICommand LoginCommand { get; set; }
 
+        /// <summary>
+        /// the command to register for new account
+        /// </summary>
+        public ICommand RegisterCommand { get; set; }
         #endregion
 
 
@@ -48,10 +52,12 @@ namespace SunnyLize.Word
         {
             
             //Creating a command
-            LoginCommand = new RelayParameterizedCommand( async (parameter) => await Login(parameter)); 
+            LoginCommand = new RelayParameterizedCommand( async (parameter) => await LoginAsync(parameter)); 
+           RegisterCommand = new RelayCommand(async() => await RegisterAsync()); 
            
         }
 
+      
         #endregion
 
         #region User Login Task Method
@@ -60,7 +66,7 @@ namespace SunnyLize.Word
         /// </summary>
         /// <param name="parameter">The securestring pass in from the view for the user password</param>
         /// <returns></returns>
-        public async Task Login(object parameter)
+        public async Task LoginAsync(object parameter)
         {
             //if (LoginIsRunning)
             //        return;
@@ -77,6 +83,23 @@ namespace SunnyLize.Word
             });
                 //LoginIsRunning = false;
 
+        }
+        #endregion
+
+        #region User Registeration Task Method
+        /// <summary>
+        /// Takes the user to register page 
+        /// </summary>
+        /// <returns></returns>
+        public async Task RegisterAsync()
+        {
+            //Todo: to go register page
+            ((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext)
+                .CurrentPage = ApplicationPage.Register;
+                
+            await Task.Delay(1);
+
+                     
         }
         #endregion
     }

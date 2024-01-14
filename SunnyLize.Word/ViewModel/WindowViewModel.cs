@@ -109,7 +109,7 @@ namespace SunnyLize.Word
         /// <summary>
         /// The current page login appliaction
         /// </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Chat; //Once we change it ApplicationPage.Login our login animation will appear
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login; //Once we change it ApplicationPage.Login our login animation will appear
 
         #endregion pr
 
