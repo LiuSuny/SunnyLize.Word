@@ -154,7 +154,9 @@
                 </Grid.Background>
        
       <!--Next we connect our loginpage window inside our mainwindow form -->
-            <Frame Grid.Column="1" x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" Background="Transparent"/>
+            <Frame Grid.Column="1" x:Name="MainFrame" 
+                   Content="{Binding ApplicationViewModel.CurrentPage, ElementName=AppWindow, Converter={local:ApplicationPageValueConverter}}" 
+                   Background="Transparent"/>
             <!--Side menu control-->
             <local:SideMenuControl>
                 <local:ChatListControl Height="500" />

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SunnyLize.Word.Core;
 
 namespace SunnyLize.Word
 {
@@ -21,11 +22,11 @@ namespace SunnyLize.Word
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ApplicationViewModel ApplicationViewModel => new ApplicationViewModel(); //singleton
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = new WindowViewModel(this);
-
         }
     }
 }
