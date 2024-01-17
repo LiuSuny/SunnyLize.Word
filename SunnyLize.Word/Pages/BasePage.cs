@@ -1,5 +1,6 @@
 ﻿
 
+using SunnyLize.Word.Core;
 using System;
 using System.Threading.Tasks;
 using System.Windows;

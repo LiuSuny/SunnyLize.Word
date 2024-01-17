@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// Helper for the <see cref="SecureString"/> class

@@ -1,11 +1,11 @@
 ﻿
-using PropertyChanged;
-using System;
+
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System;
 
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// A base view model that fires Property Changed events as needed
@@ -57,6 +57,10 @@ namespace SunnyLize.Word
                 updatingflag.SetPropertyValue(false);
             }
         }
+
+        private class ImplementPropertyChangedAttribute : Attribute  {
+        }
+      
         #endregion
     }
 }

@@ -7,7 +7,7 @@ using System.Security;
 using System.Threading.Tasks;
 
 
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     
     /// <summary>
@@ -92,10 +92,10 @@ namespace SunnyLize.Word
         /// </summary>
         /// <returns></returns>
         public async Task RegisterAsync()
-        {
+        { 
             //Todo: to go register page
-            ((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext)
-                .CurrentPage = ApplicationPage.Register;
+            //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext)
+            //    .CurrentPage = ApplicationPage.Register;
                 
             await Task.Delay(1);
 

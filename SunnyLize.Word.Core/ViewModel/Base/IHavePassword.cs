@@ -5,7 +5,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// An interface for a lass that can provide secure password

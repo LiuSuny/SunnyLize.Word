@@ -1,6 +1,6 @@
 ﻿
 
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// A view model for each chat list item in the overview chat list

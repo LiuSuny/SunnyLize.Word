@@ -1,5 +1,5 @@
 ﻿
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// A page of the application

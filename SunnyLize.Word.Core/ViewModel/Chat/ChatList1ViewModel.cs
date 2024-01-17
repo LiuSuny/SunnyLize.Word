@@ -1,9 +1,9 @@
 ﻿
 
 using System.Collections.Generic;
-using System.Windows.Documents;
 
-namespace SunnyLize.Word
+
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// A view model for the  overview chat list 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SunnyLize.Word"
+               xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"
              mc:Ignorable="d" 
               Height="100"
              d:DesignHeight="60" d:DesignWidth="300">
@@ -111,7 +112,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <ContentControl d:DataContext="{x:Static local:ChatListItemDesignModel.Instance}"
+    <ContentControl d:DataContext="{x:Static core:ChatListItemDesignModel.Instance}"
                     Style="{StaticResource ContentStyle}"/>
 
 </UserControl>

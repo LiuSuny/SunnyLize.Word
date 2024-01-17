@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System;
 using System.Windows;
 using System.Windows.Input;
-
+using SunnyLize.Word.Core;
 
 namespace SunnyLize.Word
 {
@@ -43,15 +43,17 @@ namespace SunnyLize.Word
         /// The size of the resize border around the window
         /// </summary>
         //public int ResizeBorder { get; set; } = 6;
-        public int ResizeBorder { get { return Borderless ? 0 : 6; } }
+        public int ResizeBorder => Borderless ? 0 : 6; //{ get { return Borderless ? 0 : 6; } } 
 
         /// <summary>
         /// The size of the resize border around the window taking into account the outermargin
+        /// { get{ return new Thickness(ResizeBorder + OuterMargineSize); } }
         /// </summary>
-        public Thickness ResizeBorderThickness { get{ return new Thickness(ResizeBorder + OuterMargineSize); } }
+        public Thickness ResizeBorderThickness => new Thickness(ResizeBorder + OuterMargineSize);
 
         /// <summary>
         /// The padding of the Inner content of main window
+        /// 
         /// </summary>
        // public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder);} } 
         public Thickness InnerContentPadding { get; set; } = new Thickness(0); 
@@ -62,49 +64,64 @@ namespace SunnyLize.Word
         /// </summary>
         public int OuterMargineSize
         {
-            get
-            {
-                //return mWindow.WindowState == WindowState.Maximized ? 0 : mOuterMargineSize;
+            //get
+            //{
+            //    //return mWindow.WindowState == WindowState.Maximized ? 0 : mOuterMargineSize;
 
-                //meaning if it is maximized or docked, then no border
-                return Borderless ? 0 : mOuterMargineSize;
-            }
-            set
-            {
-                mOuterMargineSize = value;
-            }
+            //    //meaning if it is maximized or docked, then no border
+            //    return Borderless ? 0 : mOuterMargineSize;
+            //}
+            //set
+            //{
+            //    mOuterMargineSize = value;
+            //}
+
+            get => Borderless ? 0 : mOuterMargineSize; 
+            set => mOuterMargineSize = value;
+            
+              
+            
         }
 
         /// <summary>
         /// The margine around the window to allow for a drop shadow
+        /// { get { return new Thickness(OuterMargineSize); } }
         /// </summary>
-        public Thickness OuterMargineSizeThickness { get { return new Thickness(OuterMargineSize); } }
+        public Thickness OuterMargineSizeThickness => new Thickness(OuterMargineSize);
            
         /// <summary>
         /// The radius of the edges f window
         /// </summary>
         public int WindowRadius
         {
-            get
-            {
-                return mWindow.WindowState == WindowState.Maximized ? 0 : mWindowRadius;
-            }
-            set
-            {
-                mWindowRadius = value;
-            }
+            //get
+            //{
+            //    return mWindow.WindowState == WindowState.Maximized ? 0 : mWindowRadius;
+            //}
+            //set
+            //{
+            //    mWindowRadius = value;
+            //}
+
+            get => mWindow.WindowState == WindowState.Maximized ? 0 : mWindowRadius;
+            set => mWindowRadius = value;
+           
+               
+            
         }
 
         /// <summary>
         /// The radius of the edges f window
+        /// { get { return new CornerRadius(WindowRadius); } }
         /// </summary>
-        public CornerRadius WindowCornerRadius { get { return new CornerRadius(WindowRadius); } }
+        public CornerRadius WindowCornerRadius => new CornerRadius(WindowRadius);
 
         /// <summary>
         /// The height of the title bar/caption of the window
+        /// { get { return new GridLength(TitleHeight + ResizeBorder); } }
         /// </summary>
         public int TitleHeight { get; set; } = 42;
-        public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight + ResizeBorder); } }
+        public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder); 
 
         /// <summary>
         /// The current page login appliaction

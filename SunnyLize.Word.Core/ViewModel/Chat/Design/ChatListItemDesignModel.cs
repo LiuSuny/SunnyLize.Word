@@ -1,6 +1,6 @@
 ﻿
 
-namespace SunnyLize.Word
+namespace SunnyLize.Word.Core
 {
     /// <summary>
     /// the design-time data for <see cref="ChatListViewModel"/>
