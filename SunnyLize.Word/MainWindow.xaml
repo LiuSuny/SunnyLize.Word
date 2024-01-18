@@ -148,14 +148,14 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-                <Grid.Background>
+
+            <Grid.Background>
                     <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/Emoji-background.png"/>
                 </Grid.Background>
        
       <!--Next we connect our loginpage window inside our mainwindow form -->
             <Frame Grid.Column="1" x:Name="MainFrame" 
-                   Content="{Binding ApplicationViewModel.CurrentPage, ElementName=AppWindow, Converter={local:ApplicationPageValueConverter}}" 
+                   Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static local:ViewModelLocator.Instance}, Converter={local:ApplicationPageValueConverter}}" 
                    Background="Transparent"/>
             <!--Side menu control-->
             <local:SideMenuControl>

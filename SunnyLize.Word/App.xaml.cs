@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SunnyLize.Word.Core;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,21 @@ namespace SunnyLize.Word
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Customize startup so we can load our IOC container immediately before anything else
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            //We are allowing the base appliaction do what it need
+            base.OnStartup(e);
+
+            //Setup ioc
+            IOCContainer.SetUp();
+
+            //Next we show the main window
+            Current.MainWindow = new MainWindow();
+            Current.MainWindow.Show();
+        }
     }
 }

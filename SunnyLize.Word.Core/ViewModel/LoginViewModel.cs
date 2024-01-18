@@ -92,10 +92,11 @@ namespace SunnyLize.Word.Core
         /// </summary>
         /// <returns></returns>
         public async Task RegisterAsync()
-        { 
-            //Todo: to go register page
-            //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext)
-            //    .CurrentPage = ApplicationPage.Register;
+        {
+            // go register page
+            //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
+            IOCContainer.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Register;
+            
                 
             await Task.Delay(1);
 

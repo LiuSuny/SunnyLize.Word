@@ -22,7 +22,7 @@ namespace SunnyLize.Word
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ApplicationViewModel ApplicationViewModel => new ApplicationViewModel(); //singleton
+        //public ApplicationViewModel ApplicationViewModel => new ApplicationViewModel(); //singleton
         public MainWindow()
         {
             InitializeComponent();
