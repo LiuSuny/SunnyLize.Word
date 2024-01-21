@@ -93,6 +93,10 @@ namespace SunnyLize.Word.Core
         /// <returns></returns>
         public async Task RegisterAsync()
         {
+            IOCContainer.Get<ApplicationViewModel>().SideMenuVisible ^= true;
+            return;
+
+
             // go register page
             //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
             IOCContainer.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Register;

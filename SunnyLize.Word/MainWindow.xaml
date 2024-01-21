@@ -22,7 +22,7 @@
                 <ControlTemplate TargetType="{x:Type Window}">
                   
                     <!--Outer border with the dropshadow margin-->
-                        <Border Padding="{Binding OuterMargineSizeThickness, FallbackValue=10}">
+                        <Border Margin="{Binding OuterMargineSizeThickness, FallbackValue=10}">
                            
                             <!--this grid is the main window outline-->
                             <Grid >
@@ -120,7 +120,9 @@
                                     
                                     <!-- page contenet......issue with rounded corner-->
                                     <!--<Border Grid.Row="2" Padding="{Binding InnerContentPadding}">-->
-                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}">
+                                   
+                                    <!--Page content-->
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}" ClipToBounds="True">
                                     <ContentPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
                                 </Grid>
@@ -145,7 +147,7 @@
         
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -158,7 +160,9 @@
                    Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static local:ViewModelLocator.Instance}, Converter={local:ApplicationPageValueConverter}}" 
                    Background="Transparent"/>
             <!--Side menu control-->
-            <local:SideMenuControl>
+            <local:SideMenuControl Width="300" local:AnimateSlideInFromLeftProperty.Value 
+                                   ="{Binding ApplicationViewModel.SideMenuVisible,
+                Source={x:Static local:ViewModelLocator.Instance}}">
                 <local:ChatListControl Height="500" />
             </local:SideMenuControl>
         </Grid>

@@ -15,10 +15,17 @@ namespace SunnyLize.Word
     {
         #region public Event Listener
         /// <summary>
-        /// Fired the event for this class
+        /// Fired the event when the value change
         /// </summary>
         public event Action<DependencyObject, DependencyPropertyChangedEventArgs>
             ValueChanged = (sender, e) => { };
+
+
+        /// <summary>
+        /// Fired the event when the value change even when the value are the same
+        /// </summary>
+        public event Action<DependencyObject, object>
+            ValueUpdated = (sender, value) => { };
         #endregion
 
 
@@ -34,12 +41,15 @@ namespace SunnyLize.Word
         #region Attached Property Definitions
 
         /// <summary>
-        /// The actual Atatched property for this class
+        /// The actual Attached property for this class
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.RegisterAttached("Value", typeof(Property),
                 typeof(BaseAttachedProperty<Parent, Property>),
-                new PropertyMetadata(new PropertyChangedCallback(OnValuePropertyChanged)));
+                new UIPropertyMetadata( default(Property),
+                    new PropertyChangedCallback(OnValuePropertyChanged), 
+                    new CoerceValueCallback(OnValuePropertyUpdated)
+                    ));
 
         /// <summary>
         /// The callback event when <see cref="ValueProperty"/> is changed
@@ -54,6 +64,25 @@ namespace SunnyLize.Word
             //call event listener
             Instance.ValueChanged(d, e);
         }
+
+
+        /// <summary>
+        /// The callback event when <see cref="ValueProperty"/> is changed even if the same value
+        /// </summary>
+        /// <param name="d">The UI element that had it's property changed</param>
+        /// <param name="e"> The argument for the event</param>
+        private static object OnValuePropertyUpdated(DependencyObject d, object value)
+        {
+            //call the parent function 
+            Instance.OnvalueUpdated(d, value);
+
+            //call event listener
+            Instance.ValueUpdated(d, value);
+
+            //return value
+            return value;
+        }
+
 
         /// <summary>
         /// Gets the attached property
@@ -85,6 +114,14 @@ namespace SunnyLize.Word
         /// <param name="sender">The Ui element that this property was cahnged for</param>
         /// <param name="e">The argument for this event</param>
         public virtual void OnvalueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
+
+
+        /// <summary>
+        /// This method is called when any attached property of this type is changed even if the value is the same
+        /// </summary>
+        /// <param name="sender">The Ui element that this property was cahnged for</param>
+        /// <param name="e">The argument for this event</param>
+        public virtual void OnvalueUpdated(DependencyObject sender, object value) { }
         #endregion
 
     }

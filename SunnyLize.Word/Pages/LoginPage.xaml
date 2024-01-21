@@ -48,11 +48,12 @@
                             <TextBox Text="{Binding Email}" Tag="Email" />
                             
                             <!--Password-->
-                            <PasswordBox x:Name="PasswordText" Tag="Password" Margin="0 0 0 30"/>
+                            <PasswordBox x:Name="PasswordText" 
+                                         Tag="Password" Margin="0 0 0 30"/>
 
                              <!--Next button we can turn our next button off by writing isEnable =
                             false or disable the login button by typing IsEnabled = "{Binding LoginIsRunning}"-->
-                            <Button  Content="Login" 
+                            <Button  Content="Login"                                                                   
                                      local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                                      Command="{Binding LoginCommand}" 
                                      CommandParameter="{Binding ElementName=Page}"  
