@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SunnyLize.Word"
-               xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"
+             xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"
              mc:Ignorable="d" 
              d:DesignWidth="300" Height="300">
     <Grid DataContext="{x:Static core:ChatList1DesignModel.ListInstance}" Background="{StaticResource ForegroundLightBrush}">
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" >
             <ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

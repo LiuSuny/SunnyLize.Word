@@ -74,7 +74,30 @@ namespace SunnyLize.Word.Core
                    Message = "The new server is up, go to 192.168.1.1",
                   ProfilePictureRGB = "00d405"                
                },
-              
+
+                  new ChatListItemViewModel
+               {
+                   Name = "Luke",
+                   Initials = "LM",
+                   Message = "This new chat app is awesome! I bet it will be fast too",
+                  ProfilePictureRGB = "3099c5",
+                   NewContentAvailable= true
+               },
+
+                   new ChatListItemViewModel
+               {
+                   Name = "Jesse",
+                   Initials = "JA",
+                   Message = "Hey dude, here are the new icons",
+                  ProfilePictureRGB = "fe4503"
+               },
+                     new ChatListItemViewModel
+               {
+                   Name = "Parnel",
+                   Initials = "PL",
+                   Message = "The new server is up, go to 192.168.1.1",
+                  ProfilePictureRGB = "00d405"
+               },
             };
         }
 
