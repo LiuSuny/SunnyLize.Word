@@ -72,14 +72,16 @@ namespace SunnyLize.Word.Core
             //        return;
 
             // LoginIsRunning = true;
-            await RunCommand(() =>this.LoginIsRunning, async () =>
+            await RunCommandAsync(() =>this.LoginIsRunning, async () =>
             {
-                await Task.Delay(5000);
+                await Task.Delay(1000);
 
-                var email = this.Email;
+                //Go to chat page
+                IOCContainer.Get<ApplicationViewModel>().GotToPage(ApplicationPage.Chat);
+                //var email = this.Email;
 
-                //Note: Never store unsecure [password in variable like this
-                var pass = (parameter as IHavePassword).SecurePassword.UnSecure();
+                ////Note: Never store unsecure [password in variable like this
+                //var pass = (parameter as IHavePassword).SecurePassword.UnSecure();
             });
                 //LoginIsRunning = false;
 
@@ -93,13 +95,14 @@ namespace SunnyLize.Word.Core
         /// <returns></returns>
         public async Task RegisterAsync()
         {
-            IOCContainer.Get<ApplicationViewModel>().SideMenuVisible ^= true;
-            return;
+            //IOCContainer.Get<ApplicationViewModel>().SideMenuVisible ^= true;
+            //return;
 
 
             // go register page
             //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
-            IOCContainer.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Register;
+          
+            IOCContainer.Get<ApplicationViewModel>().GotToPage(ApplicationPage.Register);
             
                 
             await Task.Delay(1);

@@ -22,7 +22,7 @@
                 <ControlTemplate TargetType="{x:Type Window}">
                   
                     <!--Outer border with the dropshadow margin-->
-                        <Border Margin="{Binding OuterMargineSizeThickness, FallbackValue=10}">
+                        <Border Padding="{Binding OuterMargineSizeThickness, FallbackValue=10}">
                            
                             <!--this grid is the main window outline-->
                             <Grid >
@@ -156,9 +156,14 @@
                 </Grid.Background>
        
       <!--Next we connect our loginpage window inside our mainwindow form -->
-            <Frame Grid.Column="1" x:Name="MainFrame" 
-                   Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static local:ViewModelLocator.Instance}, Converter={local:ApplicationPageValueConverter}}" 
-                   Background="Transparent"/>
+            <local:PageHost Grid.Column="1"                 
+                   d:DataContext=""
+                   DataContext="{Binding ApplicationViewModel.CurrentPage, 
+                   Source={x:Static local:ViewModelLocator.Instance}, 
+                Converter={local:ApplicationPageValueConverter}}"
+                   CurrentPage="{Binding}"   />
+                   
+                                                
             <!--Side menu control-->
             <local:SideMenuControl Width="300" local:AnimateSlideInFromLeftProperty.Value 
                                    ="{Binding ApplicationViewModel.SideMenuVisible,

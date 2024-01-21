@@ -37,7 +37,7 @@ namespace SunnyLize.Word.Core
         /// <param name="updatingflag">the boolean property flag which define if the command is already running</param>
         /// <param name="action">The action to run if the command is not readuy running</param>
         /// <returns></returns>
-        protected async Task RunCommand(Expression<Func<bool>> updatingflag, Func<Task> action)
+        protected async Task RunCommandAsync(Expression<Func<bool>> updatingflag, Func<Task> action)
         {
             //Checking if the flag property is true (meaning the function is already running)
             if (updatingflag.GetPropertyValue())

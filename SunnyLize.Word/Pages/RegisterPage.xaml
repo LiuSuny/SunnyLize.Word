@@ -1,4 +1,4 @@
-﻿<local:BasePage x:TypeArguments="core:LoginViewModel" x:Class="SunnyLize.Word.RegisterPage"
+﻿<local:BasePage x:TypeArguments="core:RegisterViewModel" x:Class="SunnyLize.Word.RegisterPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -53,14 +53,18 @@
                              <!--Next button we can turn our next button off by writing isEnable =
                             false or disable the login button by typing IsEnabled = "{Binding LoginIsRunning}"-->
                             <Button  Content="Register" 
-                                     local:IsBusyProperty.Value="{Binding LoginIsRunning}"
-                                     Command="{Binding LoginCommand}" 
+                                     local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
+                                     Command="{Binding RegisterCommand}" 
                                      CommandParameter="{Binding ElementName=Page}"  
                                      HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Border>
 
-                    <Button Style="{StaticResource TextButton }" Content=" Or, I already have an account..." HorizontalAlignment="Center"/>
+                    <Button Style="{StaticResource TextButton }" 
+                            Content=" Or, I already have an account..." 
+                            HorizontalAlignment="Center"
+                            Command="{Binding LoginCommand}"
+                            />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

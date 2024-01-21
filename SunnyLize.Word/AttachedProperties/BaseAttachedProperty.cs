@@ -11,7 +11,7 @@ namespace SunnyLize.Word
     /// <typeparam name="Parent">parent to be the attched property</typeparam>
     /// <typeparam name="Property">the type of this attached property(boolean)</typeparam>
     public abstract class BaseAttachedProperty<Parent, Property>
-        where Parent : BaseAttachedProperty<Parent, Property>, new() //this tell class that parent is the new instance class 
+        where Parent :/* BaseAttachedProperty<Parent, Property>,*/ new() //this tell class that parent is the new instance class 
     {
         #region public Event Listener
         /// <summary>
@@ -59,10 +59,10 @@ namespace SunnyLize.Word
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             //call the parent function 
-            Instance.OnvalueChanged(d, e);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.OnvalueChanged(d, e);
 
             //call event listener
-            Instance.ValueChanged(d, e);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.ValueChanged(d, e);
         }
 
 
@@ -74,10 +74,10 @@ namespace SunnyLize.Word
         private static object OnValuePropertyUpdated(DependencyObject d, object value)
         {
             //call the parent function 
-            Instance.OnvalueUpdated(d, value);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.OnvalueUpdated(d, value);
 
             //call event listener
-            Instance.ValueUpdated(d, value);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.ValueUpdated(d, value);
 
             //return value
             return value;

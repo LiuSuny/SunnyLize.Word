@@ -9,22 +9,11 @@ using System.Windows.Media.Animation;
 
 namespace SunnyLize.Word
 {
-   
     /// <summary>
     /// Base page for all pages to gain base functionality
     /// </summary>
-    public class BasePage<VM>: Page
-        where VM : BaseViewModel, new()
+    public class BasePage: Page
     {
-        
-        #region Private memeber
-        /// <summary>
-        /// View models associated with this page
-        /// </summary>
-        private VM mViewModel { get; set; }
-
-        #endregion
-
         #region Public Properties
         /// <summary>
         /// The animation that play when the page is first loaded
@@ -39,26 +28,15 @@ namespace SunnyLize.Word
         /// <summary>
         /// the time the animation take to complete
         /// </summary>
-        public float SlideSeconds { get; set; } = 0.8f;
+        public float SlideSeconds { get; set; } = 0.4f;
 
         /// <summary>
-        /// View models associated with this page
+        /// Aflag to indicate  if this page should animate when is on load
+        /// usefull for when we are moving the page to another frame
         /// </summary>
-        public VM ViewModel 
-        { get { return mViewModel; }
-            set
-            {
-                //if nothing change, return nothing
-                if (mViewModel == value)
-                    return;
-                //otherwise update the value
-                mViewModel = value;
-
-                //set our datacontext to viewmodel on this page
-                this.DataContext = mViewModel;
-            }
-        }
+        public bool ShouldAnimateOut { get; set; }
         #endregion
+
 
         #region Constructor
         /// <summary>
@@ -72,11 +50,13 @@ namespace SunnyLize.Word
 
             //Listening out for the page loaded
             this.Loaded += BasePage_Loaded;
-
-            //create a default ViewModel
-          this.ViewModel = new VM();
+          
+            
         }
         #endregion
+
+
+
 
         #region Animation Load/Unload
 
@@ -87,10 +67,16 @@ namespace SunnyLize.Word
         /// <param name="e"></param>
         private async void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
+            //if we are setup to animate out on load
+            if (ShouldAnimateOut)
+                //animate ut
+                await AniminateOut();
+            //otherwise....
+            else
             //Animate in this page 
             await AnimateIn();
         }
-       
+
         /// <summary>
         /// AnimateIn in this page
         /// </summary>
@@ -100,7 +86,7 @@ namespace SunnyLize.Word
             //Trying to make sure we have something to do
             if (this.PageLoadAnimation == PageAnimation.None)
                 return;
-            switch(this.PageLoadAnimation)
+            switch (this.PageLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInFromRight:
 
@@ -146,5 +132,64 @@ namespace SunnyLize.Word
             }
         }
         #endregion
+
+
+
+
+    }
+
+
+
+
+
+    /// <summary>
+    /// Base page for added viewmodel support
+    /// </summary>
+    public class BasePage<VM>: BasePage
+        where VM : BaseViewModel, new()
+    {
+        
+        #region Private memeber
+        /// <summary>
+        /// View models associated with this page
+        /// </summary>
+        private VM mViewModel { get; set; }
+
+        #endregion
+
+        #region Public Properties
+      
+        /// <summary>
+        /// View models associated with this page
+        /// </summary>
+        public VM ViewModel 
+        { get { return mViewModel; }
+            set
+            {
+                //if nothing change, return nothing
+                if (mViewModel == value)
+                    return;
+                //otherwise update the value
+                mViewModel = value;
+
+                //set our datacontext to viewmodel on this page
+                this.DataContext = mViewModel;
+            }
+        }
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Default ctor
+        /// </summary>
+        public BasePage() : base()
+        {
+           
+            //create a default ViewModel
+          this.ViewModel = new VM();
+        }
+        #endregion
+
+       
     }
 }
