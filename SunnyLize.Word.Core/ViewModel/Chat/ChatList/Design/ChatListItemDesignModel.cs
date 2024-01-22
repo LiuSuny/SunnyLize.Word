@@ -3,7 +3,7 @@
 namespace SunnyLize.Word.Core
 {
     /// <summary>
-    /// the design-time data for <see cref="ChatListViewModel"/>
+    /// the design-time data for <see cref="ChatListItemViewModel"/>
     /// </summary>
     public class ChatListItemDesignModel : ChatListItemViewModel
     {

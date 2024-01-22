@@ -63,10 +63,14 @@
     <Compile Include="ViewModel\Base\IHavePassword.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="ViewModel\Base\RelayParameterizedCommand.cs" />
-    <Compile Include="ViewModel\Chat\ChatList1ViewModel.cs" />
-    <Compile Include="ViewModel\Chat\ChatListItemViewModel.cs" />
-    <Compile Include="ViewModel\Chat\Design\ChatList1DesignModel.cs" />
-    <Compile Include="ViewModel\Chat\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatList\ChatList1ViewModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatList\ChatListItemViewModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatList\Design\ChatList1DesignModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatList\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatMessage\ChatMessageListItemViewModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatMessage\ChatMessageListViewModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatMessage\DesignMessage\ChatMessageListDesignModel.cs" />
+    <Compile Include="ViewModel\Chat\ChatMessage\DesignMessage\ChatMessageListItemDesignModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>

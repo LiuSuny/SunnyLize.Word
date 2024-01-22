@@ -7,12 +7,18 @@
                xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"
              mc:Ignorable="d" 
              d:DesignWidth="300">
-    <Border Padding="5" Background="{StaticResource WordBlueBrush}">
+    <Border Padding="5" 
+            Background="{StaticResource WordBlueBrush}"
+            d:DataContext="{x:Static core:ChatMessageListItemDesignModel.Instance}"
+            >
         <Grid>
 
+            <!-- Visibility="{Binding SentByMe, Converter={local:BooleanToVisibilityConverter}}" 
+            this make sender message profile pic hidden-->
             <!--Profile picture-->
             <Border VerticalAlignment="Top"
                     Margin="0 7.5 0 7.5"
+                    Visibility="{Binding SentByMe, Converter={local:BooleanToVisibilityConverter}}"
                     HorizontalAlignment="Left"
                     CornerRadius="{Binding ActualWidth, RelativeSource= {RelativeSource Self}}"
                     Height="{Binding ActualWidth, RelativeSource= {RelativeSource Self}}"
@@ -21,7 +27,7 @@
                     BorderBrush="{StaticResource ForegroundLightBrush}"
                     BorderThickness="1"
                     >
-                <TextBlock Text="LM"
+                <TextBlock Text="{Binding Initials}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Foreground="{StaticResource ForegroundLightBrush}"
@@ -30,7 +36,33 @@
             </Border>
 
             <!--Chat message container-->
-            <Grid Margin="25 0 0 0" HorizontalAlignment="Left">
+            <Grid Margin="25 0 25 0"                              
+                  HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeAlignmentConverter}}">
+
+                <Grid.Triggers>
+                    <!--Mouse over show time-->
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetName="ExtraDetails"
+                                        Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimation  To="1"
+                                                 Duration="00:00:00.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+
+                    <!--Mouse leave hide time-->
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetName="ExtraDetails"
+                                        Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimation To="0"
+                                                 Duration="00:00:00.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    
+                </Grid.Triggers>
                 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -40,15 +72,15 @@
 
                 <!--Speech bubble rectange-->
                 <Border CornerRadius="10"
-                    Padding="15"   
-                    Background="{StaticResource ForegroundLightBrush}" 
+                    Padding="15"                          
+                    Background="{Binding SentByMe, Converter={local:SentByMeToBackgroundConverter}}" 
                     >
                     <!--Message text-->
                     <TextBlock VerticalAlignment="Center"
                            FontFamily="{StaticResource LatoRegular}"
                            TextWrapping="Wrap"
                            Foreground="{StaticResource WordDarkBlueBrush}"
-                           Text="This chat app is awesome! when is it coming out ? I want to use it on my system"/>
+                           Text="{Binding Message}"/>
 
                 </Border>
 
@@ -59,16 +91,34 @@
                       Margin="15,-1,15,0"
                       Data="M 0,0 L 10,10 L 20,0 L 0,0"
                       StrokeThickness="0"
-                      Fill="{StaticResource ForegroundLightBrush}" />
-
-                <!--Add chat time manually-->
-                <TextBlock
-                          Grid.Row="2"
-                          Text="11:55am"
+                      HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeAlignmentConverter}}"
+                      Fill="{Binding SentByMe, Converter={local:SentByMeToBackgroundConverter}}"  />
+               
+                <!--Time Container-->
+                <StackPanel Name="ExtraDetails" 
+                            Grid.Row="2"
+                            Opacity="0"
+                            Orientation="Horizontal"
+                            >
+                    <!--Add message sent time -->
+                    <TextBlock                         
+                          Text="{Binding MessageSentTime, Converter={local:TimeToDisplayTimeConverter}}"
                            Foreground="{StaticResource ForegroundLightBrush}"
                           HorizontalAlignment="Right"
-                           FontSize="{StaticResource FontSizeSmall}"                   
+                           FontSize="{StaticResource FontSizeSmall}" 
+                           FontFamily="{StaticResource LatoRegular}"
+                           Margin="0 0 15 0"
                            />
+
+                    <!--Add message read time -->
+                    <TextBlock                         
+                          Text="{Binding MessageReadTime, Converter={local:TimeToReadMessageTimeConverter}}"
+                           Foreground="{StaticResource WordDarkBlueBrush}"
+                          HorizontalAlignment="Right"
+                           FontSize="{StaticResource FontSizeSmall}" 
+                           FontFamily="{StaticResource LatoRegular}"                      
+                           />
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

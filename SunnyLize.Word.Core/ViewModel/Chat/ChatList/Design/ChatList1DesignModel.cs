@@ -81,7 +81,7 @@ namespace SunnyLize.Word.Core
                    Initials = "LM",
                    Message = "This new chat app is awesome! I bet it will be fast too",
                   ProfilePictureRGB = "3099c5",
-                   NewContentAvailable= true
+                   
                },
 
                    new ChatListItemViewModel
