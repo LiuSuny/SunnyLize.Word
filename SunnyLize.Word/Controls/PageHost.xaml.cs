@@ -1,5 +1,7 @@
 ﻿
+using SunnyLize.Word.Core;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,6 +46,13 @@ namespace SunnyLize.Word
         public PageHost()
         {
             InitializeComponent();
+
+            //If we are in design mode show the cureent page
+            //as the dependency doesn't fire
+            if(DesignerProperties.GetIsInDesignMode(this))
+           //just for the designer we basically take the currentpage and convert it to basepage just only for the designer
+                NewPage.Content = (BasePage)new ApplicationPageValueConverter().Convert(IOCContainer.Get<ApplicationViewModel>().CurrentPage);
+           
         }
         #endregion
 
@@ -72,9 +81,21 @@ namespace SunnyLize.Word
             //Animate out the previous page when loaded event is fire
             //right after the call due to moving frames
             if (oldePageContent is BasePage oldPage)
+            {
                 // oldPage.AniminateOut(); //encounter warning error but to get ride of with implement the following
                 //Task.Run(oldPage.AniminateOut);
+
+                //Tell old page to animateOut
                 oldPage.ShouldAnimateOut = true;
+
+                //Once it is done remove it
+                Task.Delay((int)oldPage.SlideSeconds * 1000).ContinueWith((t) =>
+                {
+                    //remove old page
+                    Application.Current.Dispatcher.Invoke(() => oldPageFrame.Content = null);
+
+                });
+            }
 
             //setting up the new page content
             newPageFrame.Content = e.NewValue;

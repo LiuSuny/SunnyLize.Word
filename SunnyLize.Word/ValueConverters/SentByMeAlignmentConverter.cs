@@ -14,8 +14,12 @@ namespace SunnyLize.Word
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //if the value pass in is sent by me return horizentalAlignment to right : other to left
-            return (bool)value ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+            if (parameter == null) //Default behaviour
+                                   //if the value pass in is sent by me return horizentalAlignment to right : other to left
+                return (bool)value ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+            //Otherwise
+            else
+                return (bool)value ? HorizontalAlignment.Left : HorizontalAlignment.Right;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

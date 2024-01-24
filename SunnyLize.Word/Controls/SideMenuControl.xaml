@@ -11,7 +11,8 @@
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
             <!--The main left side chat background-->
-            <Border Background="{StaticResource ForegroundLightBrush}">
+            <!--<Border Background="{StaticResource ForegroundLightBrush}">-->
+            <Border>
 
                 <!--Next we need Contents-->
                 <Grid>
@@ -21,7 +22,9 @@
                     </Grid.RowDefinitions>
 
                     <!--To menu left side chat background-->
-                    <Grid Height="50" Background="{StaticResource WordBlueBrush}">
+                    
+                    <!--<Grid Height="50" Background="{StaticResource WordBlueBrush}">-->
+                    <Grid Height="50">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -38,8 +41,13 @@
                         <!--Setting button on the leftside menu-->
                         <Button Grid.Column="2" Foreground="{StaticResource WordDarkBlueBrush}" Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeCogIcon}"/>
                     </Grid>
-                    <!--This inject the content that the user select-->
-                    <ContentPresenter Grid.Row="1"/>
+
+                    <Border Background="{StaticResource ForegroundLightBrush}" 
+                            Grid.Row="1">
+                        <!--This inject the content that the user select-->
+                        <ContentPresenter />
+                    </Border>
+                    
                 </Grid>
 
             </Border>

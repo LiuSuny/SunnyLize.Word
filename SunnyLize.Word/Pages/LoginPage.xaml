@@ -8,16 +8,14 @@
       mc:Ignorable="d" 
        x:Name="Page"
       d:DesignHeight="700" d:DesignWidth="700"
-      Title="LoginPage">
+      >
    
     <!--Our Blue background image-->
     <!--<Border Background="{StaticResource WordBlueBrush}" >-->
     <Border>
         <Grid>
-            <!--<Grid.Background>
-                <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/Emoji-background.png"/>
-            </Grid.Background>-->
-            
+            <!--Grid FocusManager.FocusedElement="{Binding ElementName=PasswordText}"-->
+          
             <!--Abillity to scroll on our man content pages-->
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <StackPanel
@@ -45,7 +43,10 @@
                                        />
 
                             <!--Email-->
-                            <TextBox Text="{Binding Email}" Tag="Email" />
+                            <TextBox Text="{Binding Email}" 
+                                     Tag="Email"
+                                     local:IsFocusProperty.Value="True"
+                                     />
                             
                             <!--Password-->
                             <PasswordBox x:Name="PasswordText" 
@@ -53,7 +54,11 @@
 
                              <!--Next button we can turn our next button off by writing isEnable =
                             false or disable the login button by typing IsEnabled = "{Binding LoginIsRunning}"-->
-                            <Button  Content="Login"                                                                   
+                            <!--IsDefualt = true is an old word use when the user click on enter or click on the login button it will login the user automatically-->
+                           
+                            <!--Login Button-->                           
+                            <Button  Content="Login"
+                                     IsDefault="True"
                                      local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                                      Command="{Binding LoginCommand}" 
                                      CommandParameter="{Binding ElementName=Page}"  

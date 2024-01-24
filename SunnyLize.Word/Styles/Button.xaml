@@ -226,7 +226,8 @@
 
     <!--Icon button can be use for left side our chat-->
     <Style x:Key="IconButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="Background" Value="{StaticResource WordBlueBrush}"/>
+        <!--<Setter Property="Background" Value="{StaticResource WordBlueBrush}"/>-->
+        <Setter Property="Background" Value="{StaticResource WordTransparentBlueBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundLightBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}"/>
@@ -265,6 +266,7 @@
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
+                                    <!--<ColorAnimation To="{StaticResource WordLightBlue}" Duration="0:0:0.3"--> 
                                     <ColorAnimation To="{StaticResource WordLightBlue}" Duration="0:0:0.3" 
                                                     Storyboard.TargetName="border" 
                                                     Storyboard.TargetProperty="Background.Color"/>
@@ -275,7 +277,7 @@
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation To="{StaticResource WordBlue}" Duration="0:0:0.3" 
+                                    <ColorAnimation To="{StaticResource WordTransparentBlue}" Duration="0:0:0.3" 
                                                     Storyboard.TargetName="border" 
                                                     Storyboard.TargetProperty="Background.Color"/>
                                 </Storyboard>

@@ -18,7 +18,7 @@ namespace SunnyLize.Word.Core
         /// <summary>
         /// True if the side menu should be show or not
         /// </summary>
-        public bool SideMenuVisible { get; set; } = false;
+        public bool SideMenuVisible { get; set; } = false; //false to login and chat message
 
         /// <summary>
         /// Method help us to navigate to specific page

@@ -142,7 +142,7 @@
           GlassFrameThickness="0"
                       />
     </WindowChrome.WindowChrome>
-
+   
     <Border Background="{StaticResource WordBlueBrush}" >
         
         <Grid>
@@ -154,21 +154,25 @@
             <Grid.Background>
                     <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/Emoji-background.png"/>
                 </Grid.Background>
-       
-      <!--Next we connect our loginpage window inside our mainwindow form -->
+           
+            <!--Next we connect our loginpage window inside our mainwindow form -->
             <local:PageHost Grid.Column="1"                 
                    d:DataContext=""
                    DataContext="{Binding ApplicationViewModel.CurrentPage, 
                    Source={x:Static local:ViewModelLocator.Instance}, 
                 Converter={local:ApplicationPageValueConverter}}"
                    CurrentPage="{Binding}"   />
-                   
-                                                
+
+           
             <!--Side menu control-->
-            <local:SideMenuControl Width="300" local:AnimateSlideInFromLeftProperty.Value 
-                                   ="{Binding ApplicationViewModel.SideMenuVisible,
-                Source={x:Static local:ViewModelLocator.Instance}}">
+            <local:SideMenuControl
+                Width="300"
+                  local:AnimateSlideInFromLeftProperty.Value 
+                   ="{Binding ApplicationViewModel.SideMenuVisible,
+                   Source={x:Static local:ViewModelLocator.Instance}}">
+
                 <local:ChatListControl Height="500" />
+                
             </local:SideMenuControl>
         </Grid>
     </Border>

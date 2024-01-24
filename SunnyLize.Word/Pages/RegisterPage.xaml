@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
        x:Name="Page"
       d:DesignHeight="700" d:DesignWidth="700"
-      Title="Register">
+      >
    
     <!--Our Blue background image-->
     <!--<Border Background="{StaticResource WordBlueBrush}" >-->
@@ -45,14 +45,18 @@
                                        />
 
                             <!--Email-->
-                            <TextBox Text="{Binding Email}" Tag="Email" />
+                            <TextBox Text="{Binding Email}"                                      
+                                     Tag="Email"
+                                      local:IsFocusProperty.Value="True"
+                                     />
                             
                             <!--Password-->
                             <PasswordBox x:Name="PasswordText" Tag="Password" Margin="0 0 0 30"/>
 
                              <!--Next button we can turn our next button off by writing isEnable =
                             false or disable the login button by typing IsEnabled = "{Binding LoginIsRunning}"-->
-                            <Button  Content="Register" 
+                            <Button  Content="Register"
+                                     IsDefault="True"
                                      local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
                                      Command="{Binding RegisterCommand}" 
                                      CommandParameter="{Binding ElementName=Page}"  

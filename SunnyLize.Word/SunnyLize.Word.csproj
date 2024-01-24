@@ -83,6 +83,7 @@
     <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
     <Compile Include="AttachedProperties\ButtonRealAttachedProperties.cs" />
     <Compile Include="AttachedProperties\PasswordBoxRealAttachedProperties.cs" />
+    <Compile Include="AttachedProperties\TextAttachedProperties.cs" />
     <Compile Include="Controls\Chat\ChatList\ChatListControl.xaml.cs">
       <DependentUpon>ChatListControl.xaml</DependentUpon>
     </Compile>

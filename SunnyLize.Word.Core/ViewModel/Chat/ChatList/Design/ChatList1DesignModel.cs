@@ -16,7 +16,7 @@ namespace SunnyLize.Word.Core
         /// Single instane of a design model
         /// </summary>
         //public static ChatListItemDesignModel Instance { get { return new ChatListItemDesignModel();  } } //old way of returning object it also work using lambda link expression
-        public static ChatList1DesignModel ListInstance => new ChatList1DesignModel();
+        public static ChatList1DesignModel Instance => new ChatList1DesignModel();
 
         #endregion
 

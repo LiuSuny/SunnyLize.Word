@@ -20,8 +20,9 @@ namespace SunnyLize.Word.Animation
         /// <param name="element">element to animate</param>
         /// <param name="seconds">the time the animation will take</param>
         ///  <param name="keepMargin">Whether to keep the element at the same width during the animation</param>
+        /// <param name="width">The animation width  to animate to, if not specified the element width is use</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeInFromRight(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true)
+        public static async Task SlideAndFadeInFromRight(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
         {
             //created the storyboard
             var sb = new Storyboard();
@@ -30,7 +31,7 @@ namespace SunnyLize.Word.Animation
             sb.AddFadeIn(seconds);
 
             //Add slide from right animation
-            sb.AddSlideFromRight(seconds, element.ActualWidth, keepMargin: keepMargin);
+            sb.AddSlideFromRight(seconds, width==0 ? element.ActualWidth :width, keepMargin: keepMargin);
 
             //start animating
             sb.Begin(element);
@@ -49,14 +50,15 @@ namespace SunnyLize.Word.Animation
         /// <param name="element">element to animate</param>
         /// <param name="seconds">the time the animation will take</param>
         ///  <param name="keepMargin">Whether to keep the element at the same width during the animation</param>
+        ///  <param name="width">The animation width  to animate to, if not specified the element width is use</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeInFromLeft(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true)
+        public static async Task SlideAndFadeInFromLeft(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
         {
             //created the storyboard
             var sb = new Storyboard();
          
             //Add slide from right animation
-            sb.AddSlideFromLeft(seconds, element.ActualWidth, keepMargin: keepMargin);
+            sb.AddSlideFromLeft(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
 
             //add fade in animation
             sb.AddFadeIn(seconds);
@@ -77,14 +79,15 @@ namespace SunnyLize.Word.Animation
         /// <param name="element">element to animate</param>
         /// <param name="seconds">the time the animation will take</param>
         ///  <param name="keepMargin">Whether to keep the element at the same width during the animation</param>
+        ///  <param name="width">The animation width  to animate to, if not specified the element width is use</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeOutToLeft(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true)
+        public static async Task SlideAndFadeOutToLeft(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
         {
             //created the storyboard
             var sb = new Storyboard();
 
             //Add slide from right animation
-            sb.AddSlideToLeft(seconds, element.ActualWidth, keepMargin: keepMargin);
+            sb.AddSlideToLeft(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
 
             //add fade in animation
             sb.AddFadeOut(seconds);
@@ -106,14 +109,15 @@ namespace SunnyLize.Word.Animation
         /// <param name="element">element to animate</param>
         /// <param name="seconds">the time the animation will take</param>
         ///  <param name="keepMargin">Whether to keep the element at the same width during the animation</param>
+        ///  <param name="width">The animation width  to animate to, if not specified the element width is use</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeOutToRight(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true)
+        public static async Task SlideAndFadeOutToRight(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
         {
             //created the storyboard
             var sb = new Storyboard();
 
             //Add slide from right animation
-            sb.AddSlideToRight(seconds, element.ActualWidth, keepMargin: keepMargin);
+            sb.AddSlideToRight(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
 
             //add fade in animation
             sb.AddFadeOut(seconds);

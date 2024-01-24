@@ -1,7 +1,9 @@
 ﻿
 
+using SunnyLize.Word.Animation;
 using SunnyLize.Word.Core;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +14,7 @@ namespace SunnyLize.Word
     /// <summary>
     /// Base page for all pages to gain base functionality
     /// </summary>
-    public class BasePage: Page
+    public class BasePage: UserControl
     {
         #region Public Properties
         /// <summary>
@@ -44,6 +46,10 @@ namespace SunnyLize.Word
         /// </summary>
         public BasePage()
         {
+            //IF at we don't want to bother or worrying animating during design time
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return; //this basically mean if we are in design time don't bother animating
+
             //if we are animating in, hide to begin with
             if (this.PageLoadAnimation != PageAnimation.None)
                 this.Visibility = Visibility.Collapsed;
@@ -67,6 +73,7 @@ namespace SunnyLize.Word
         /// <param name="e"></param>
         private async void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
+           
             //if we are setup to animate out on load
             if (ShouldAnimateOut)
                 //animate ut
@@ -84,9 +91,9 @@ namespace SunnyLize.Word
         public async Task AnimateIn()
         {
             //Trying to make sure we have something to do
-            if (this.PageLoadAnimation == PageAnimation.None)
+            if (PageLoadAnimation == PageAnimation.None)
                 return;
-            switch (this.PageLoadAnimation)
+            switch (PageLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInFromRight:
 
@@ -108,7 +115,7 @@ namespace SunnyLize.Word
                     */
 
                     //start the animation
-                    await this.SlideAndFadeInFromRight(this.SlideSeconds); //we can decide to remove the *5 and it will slide in faster
+                    await this.SlideAndFadeInFromRight(SlideSeconds, width: (int)Application.Current.MainWindow.Width); //we can decide to remove the *5 and it will slide in faster
                     break;
             }
         }
@@ -120,14 +127,14 @@ namespace SunnyLize.Word
         public async Task AniminateOut()
         {
             //Trying to make sure we have something to do
-            if (this.PageUnLoadAnimation == PageAnimation.None)
+            if (PageUnLoadAnimation == PageAnimation.None)
                 return;
-            switch (this.PageUnLoadAnimation)
+            switch (PageUnLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInOutToLeft:
 
                     //start the animation
-                    await this.SlideAndFadeOutToLeft(this.SlideSeconds); //we can decide to remove the *5 and it will slide in faster
+                    await this.SlideAndFadeOutToLeft(SlideSeconds /*width: (int)Application.Current.MainWindow.Width*/); //we can decide to remove the *5 and it will slide in faster
                     break;
             }
         }
