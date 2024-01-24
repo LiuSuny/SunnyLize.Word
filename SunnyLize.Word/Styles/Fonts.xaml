@@ -10,7 +10,7 @@
 
     <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
         <Setter Property="FontFamily" Value="{StaticResource LatoThin}"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
@@ -38,4 +38,6 @@
     <system:String x:Key="FontAwesomeCogIcon">&#xf013;</system:String>
     <system:String x:Key="FontAwesomeSearchIcon">&#xf002;</system:String>
     <system:String x:Key="FontAwesomeEllipsisVerticalIcon">&#xf142;</system:String>
+    <system:String x:Key="FontAwesomePaparClipIcon">&#xf0c6;</system:String>
+    <system:String x:Key="FontAwesomeEmojiIcon">&#xf118;</system:String>
 </ResourceDictionary>
