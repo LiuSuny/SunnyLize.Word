@@ -84,12 +84,11 @@
 
             <!--Message chat Box-->
             <TextBox Grid.Column="1"
-                     Grid.ColumnSpan="2"
-                     Padding="0 0 50 0"
                      VerticalAlignment="Center"
                      FontSize="{StaticResource FontSizeRegular}"
                      Tag="Write a message..."
                      BorderThickness="0"
+                     Padding="0 10 10 10"
                      AcceptsReturn="True"
                      AcceptsTab="True"
                      VerticalScrollBarVisibility="Auto"
@@ -109,8 +108,7 @@
                     />
                 
                 <!--Send button-->
-                <Button Content="Send"
-                        Visibility="Collapsed"
+                <Button Content="Send"                       
                         Background="{StaticResource WordGreenBrush}"
                         Padding="8"
                         FontSize="{StaticResource FontSizeRegular}"

@@ -54,7 +54,7 @@
 
                             </Border>
                             <!--Main contents of our chat message-->
-                            <Border Grid.Column="1" Padding="0 0 8 0">
+                            <Border Grid.Column="1" Padding="0 0 15 0">
                                 <StackPanel VerticalAlignment="Center">
                                     <!--This is the name-->
                                     <TextBlock Text="{Binding Name}" 
