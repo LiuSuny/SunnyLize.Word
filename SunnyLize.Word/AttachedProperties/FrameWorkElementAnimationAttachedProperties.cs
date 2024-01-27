@@ -16,9 +16,9 @@ namespace SunnyLize.Word
     public abstract class AnimateBaseProperty<Parent> :BaseAttachedProperty<Parent, bool>
         where Parent : BaseAttachedProperty<Parent, bool>, new()
     {
-        #region public peroperty
+        #region public property
         /// <summary>
-        /// the flag indicating if it is the first the proerty have  load
+        /// the flag indicating if it is the first the property that have  load
         /// </summary>
         public bool FirstLoad { get; set; } = true;
 
@@ -101,5 +101,25 @@ namespace SunnyLize.Word
         }
     }
 
-   
+
+
+    /// <summary>
+    /// Animate a framework element sliding up from the bottom show 
+    /// and slide out from the bottom on hide
+    /// </summary>
+    public class AnimateSlideInFromBottomProperty : AnimateBaseProperty<AnimateSlideInFromBottomProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
+                //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
+                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: false);
+            else
+                //otherwise animate out
+                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: false);
+
+        }
+    }
+
 }

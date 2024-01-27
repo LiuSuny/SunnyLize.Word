@@ -48,7 +48,7 @@ namespace SunnyLize.Word.Core
 
             try
             {
-                //Run the tzsk in action
+                //Run the task in action
                 await action();
             }
             finally

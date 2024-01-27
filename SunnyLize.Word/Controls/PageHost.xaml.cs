@@ -16,6 +16,7 @@ namespace SunnyLize.Word
     {
         //propdp - shortcut to implement our previous dependency property
 
+        
 
         #region Dependency Property
         /// <summary>
