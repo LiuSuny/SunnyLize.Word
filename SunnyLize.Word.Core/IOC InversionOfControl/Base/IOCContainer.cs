@@ -19,6 +19,11 @@ namespace SunnyLize.Word.Core
         /// Note: we already install Ninject on our appliacation before this time
         /// </summary>
         public static IKernel kernel { get; private set; } = new StandardKernel();
+
+        /// <summary>
+        /// shortcut to access the <see cref="IUIManager"/>
+        /// </summary>
+        public static IUIManager UI => IOCContainer.Get<IUIManager>(); //just a sort of shortcut to reach the IUIManager
         #endregion
        
 

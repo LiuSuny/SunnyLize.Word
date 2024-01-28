@@ -23,12 +23,31 @@ namespace SunnyLize.Word
             //We are allowing the base appliaction do what it need
             base.OnStartup(e);
 
-            //Setup ioc
-            IOCContainer.SetUp();
+
+            //Setup the main application
+            ApplicationSetUp();
+
+
+            ////Setup ioc
+            //IOCContainer.SetUp();
 
             //Next we show the main window
             Current.MainWindow = new MainWindow();
             Current.MainWindow.Show();
+        }
+
+        /// <summary>
+        /// Configure our application ready for use
+        /// </summary>
+        private void ApplicationSetUp()
+        {
+            ////Setup ioc
+            IOCContainer.SetUp();
+
+            //Bind the UI manager
+            // IOCContainer.kernel.Bind<IUIManager>().ToSelf();
+
+            IOCContainer.kernel.Bind<IUIManager>().ToConstant(new UIManager());
         }
     }
 }

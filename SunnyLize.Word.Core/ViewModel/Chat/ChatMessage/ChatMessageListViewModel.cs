@@ -46,6 +46,11 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public ICommand PopupClickAwayCommand { get; set; }
 
+        /// <summary>
+        /// The command for when user clicked send command
+        /// </summary>
+        public ICommand SendCommand { get; set; }
+
         #endregion
 
 
@@ -57,6 +62,8 @@ namespace SunnyLize.Word.Core
             AttachmentButtonCommand = new RelayCommand(AttachmentButton);
 
             PopupClickAwayCommand = new RelayCommand(PopupClickAway);
+
+            SendCommand = new RelayCommand(Send);
 
             //Creating default menu
             AttachmentMenu = new ChatAttachmentPopupMenuViewModel();
@@ -83,6 +90,22 @@ namespace SunnyLize.Word.Core
             AttachmentMenuVisible = false;
         }
 
+        /// <summary>
+        /// When the user Click send button message area is clicked
+        /// </summary>
+        public /*async*/ void Send()
+        {
+            //this UI independent as the core has no idea as we can invoke the UI function
+           /* await*/ IOCContainer.UI.ShowMessage(new MessageBoxDialogViewModel
+            {
+                  Title = "Send Message",
+                  Message = "Thank you for writing a nice message :)",
+                  OkText = "OK"
+            });
+
+            //var ss = true;
+            
+        }
 
         #endregion
     }

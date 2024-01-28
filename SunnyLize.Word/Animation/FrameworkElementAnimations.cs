@@ -205,5 +205,60 @@ namespace SunnyLize.Word.Animation
 
         #endregion
 
+
+        #region Fade In / Out
+
+        /// <summary>
+        /// Fade an element in 
+        /// </summary>
+        /// <param name="element">element to animate</param>
+        /// <param name="seconds">the time the animation will take</param>
+        /// <returns></returns>
+        public static async Task FadeInAsync(this FrameworkElement element, float seconds = 0.3f)
+        {
+            //created the storyboard
+            var sb = new Storyboard();
+
+            //add fade in animation
+            sb.AddFadeIn(seconds);
+            //start animating
+            sb.Begin(element);
+
+            //make the pag visiable
+            element.Visibility = Visibility.Visible;
+
+            //wait for it to finish
+            await Task.Delay((int)seconds * 1000);
+        }
+
+
+        /// <summary>
+        /// Fade an element out
+        /// </summary>
+        /// <param name="element">element to animate</param>
+        /// <param name="seconds">the time the animation will take</param>
+        /// <returns></returns>
+        public static async Task FadeOutAsync(this FrameworkElement element, float seconds = 0.3f)
+        {
+            //created the storyboard
+            var sb = new Storyboard();
+
+            //add fade in animation
+            sb.AddFadeOut(seconds);
+            //start animating
+            sb.Begin(element);
+
+            //make the pag visiable
+            element.Visibility = Visibility.Visible;
+
+            //wait for it to finish
+            await Task.Delay((int)seconds * 1000);
+
+            //Once we are done we make our visibility hidden (fully hide the element)
+            element.Visibility = Visibility.Collapsed;
+        }
+
+
+        #endregion
     }
 }

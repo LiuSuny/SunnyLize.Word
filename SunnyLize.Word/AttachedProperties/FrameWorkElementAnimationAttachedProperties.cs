@@ -122,4 +122,24 @@ namespace SunnyLize.Word
         }
     }
 
+
+    /// <summary>
+    /// Animate a framework element fading in on show 
+    /// and fading out on hide
+    /// </summary>
+    public class AnimateFadeInInProperty : AnimateBaseProperty<AnimateFadeInInProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
+                //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
+                await element.FadeInAsync(FirstLoad ? 0 : 0.3f);
+            else
+                //otherwise animate out
+                await element.FadeOutAsync(FirstLoad ? 0 : 0.3f);
+
+        }
+    }
+
 }

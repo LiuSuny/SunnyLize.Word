@@ -15,7 +15,16 @@ namespace SunnyLize.Word
     {
         #region Private Valuable_store
 
+         /// <summary>
+        /// The window this view model controls
+        /// </summary>
         private Window mWindow;
+
+        /// <summary>
+        /// The window resizer helper that keeps the window size correct in various states
+        /// </summary>
+        private WindowResizer mWindowResizer;
+
         /// <summary>
         /// The margine around the window to allow for a drop shadow
         /// </summary>
@@ -35,15 +44,31 @@ namespace SunnyLize.Word
         #region public properties
 
         /// <summary>
+        /// The smallest width the window can go to when minimizing our window
+        /// </summary>
+        public double WindowMinimiumWidth { get; set; } = 800;
+
+        /// <summary>
+        /// The smallest height the window can go to when minimizing our window
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 500;
+
+
+        /// <summary>
         /// True if the window should be borderless because it is docked or maximized
         /// </summary>
-        public bool Borderless { get { return (mWindow.WindowState == WindowState.Maximized || mDockPosition != WindowDockPosition.Undocked); } }
+        public bool Borderless => (mWindow.WindowState == WindowState.Maximized || mDockPosition != WindowDockPosition.Undocked);
+
+        ///// <summary>
+        ///// The size of the resize border around the window
+        ///// </summary>
+        ////public int ResizeBorder { get; set; } = 6;
+        //public int ResizeBorder => Borderless ? 0 : 6; //{ get { return Borderless ? 0 : 6; } } 
 
         /// <summary>
         /// The size of the resize border around the window
         /// </summary>
-        //public int ResizeBorder { get; set; } = 6;
-        public int ResizeBorder => Borderless ? 0 : 6; //{ get { return Borderless ? 0 : 6; } } 
+        public int ResizeBorder => 10;
 
         /// <summary>
         /// The size of the resize border around the window taking into account the outermargin
@@ -103,11 +128,12 @@ namespace SunnyLize.Word
             //    mWindowRadius = value;
             //}
 
-            get => mWindow.WindowState == WindowState.Maximized ? 0 : mWindowRadius;
+            //get => mWindow.WindowState == WindowState.Maximized ? 0 : mWindowRadius;
+            //set => mWindowRadius = value;
+
+            get => Borderless ? 0 : mWindowRadius;
             set => mWindowRadius = value;
-           
-               
-            
+
         }
 
         /// <summary>
@@ -121,25 +147,21 @@ namespace SunnyLize.Word
         /// { get { return new GridLength(TitleHeight + ResizeBorder); } }
         /// </summary>
         public int TitleHeight { get; set; } = 42;
-        public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder); 
-
-       
-        #endregion pr
+        /// <summary>
+        /// The height of the title bar / caption of the window
+        /// </summary>
+        public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder);
 
         /// <summary>
-        /// The smallest width the window can go to when minimizing our window
+        /// True if we should have a dimmed overlay on the window
+        /// such as when a popup is visible or the window is not focused
         /// </summary>
-        public double WindowMinimiumWidth { get; set; } = 800;
-
-        /// <summary>
-        /// The smallest height the window can go to when minimizing our window
-        /// </summary>
-        public double WindowMinimumHeight { get; set; } = 500;
-
+        public bool DimmableOverlayVisible { get; set; }
+        #endregion
 
 
         #region Commands
-        
+
         /// <summary>
         /// the command to minimized our window
         /// </summary>
@@ -173,14 +195,9 @@ namespace SunnyLize.Word
             //Listen out for the window resizing when the state changes
             mWindow.StateChanged += (sender, e) =>
             {
-                //we implement all our event everytime there is change in our activity
-                //fire of event for all properties that are affected by a resize
-                OnPropertyChanged(nameof(ResizeBorderThickness));
-                OnPropertyChanged(nameof(OuterMargineSize));
-                OnPropertyChanged(nameof(OuterMargineSizeThickness));
-                OnPropertyChanged(nameof(WindowRadius));
-                OnPropertyChanged(nameof(WindowCornerRadius)); 
-                //OnPropertyChanged(nameof(TitleHeightGridLength)); 
+                // Fire off events for all properties that are affected by a resize
+                WindowResized();
+               
             };
 
             //Creating a command
@@ -189,15 +206,41 @@ namespace SunnyLize.Word
             CloseCommand = new RelayCommand(() => mWindow.Close()); //close command window 
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition())); //menu command window 
 
-            //Fix window resize issue
-            var resizer = new WindowResizer(mWindow);
+            ////Fix window resize issue
+            //var resizer = new WindowResizer(mWindow);
+
+            // Fix window resize issue
+            mWindowResizer = new WindowResizer(mWindow);
+
+            // Listen out for dock changes
+            mWindowResizer.WindowDockChanged += (dock) =>
+            {
+                // Store last position
+                mDockPosition = dock;
+
+                // Fire off resize events
+                WindowResized();
+            };
+        }
+
+        private void WindowResized()
+        {
+            //we implement all our event everytime there is change in our activity
+            //fire of event for all properties that are affected by a resize
+            OnPropertyChanged(nameof(Borderless));
+            OnPropertyChanged(nameof(ResizeBorderThickness));
+            OnPropertyChanged(nameof(OuterMargineSize));
+            OnPropertyChanged(nameof(OuterMargineSizeThickness));
+            OnPropertyChanged(nameof(WindowRadius));
+            OnPropertyChanged(nameof(WindowCornerRadius));
+            
         }
 
         #endregion
 
         #region Private Helper
 
-       
+
         /// <summary>
         /// Get the current mouse position on the creen
         /// </summary>
@@ -208,7 +251,9 @@ namespace SunnyLize.Word
             var position = Mouse.GetPosition(mWindow);
 
             //Add the window psition
-            return new Point(position.X + mWindow.Left, position.Y +mWindow.Top);
+            return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
+
+
         }
         #endregion
     }

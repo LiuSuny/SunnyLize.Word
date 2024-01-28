@@ -28,5 +28,17 @@ namespace SunnyLize.Word
             InitializeComponent();
             this.DataContext = new WindowViewModel(this);
         }
+
+        private void AppWindow_Deactivated(object sender, EventArgs e)
+        {
+            //Show overlay if we lose focus
+            (DataContext as WindowViewModel).DimmableOverlayVisible = true;
+        }
+
+        private void AppWindow_Activated(object sender, EventArgs e)
+        {
+            //Hide the overlay if we are focus
+            (DataContext as WindowViewModel).DimmableOverlayVisible = false;
+        }
     }
 }
