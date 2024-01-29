@@ -38,8 +38,15 @@
                             <Button Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomePictureIcon}"/>
                         </StackPanel>
 
-                        <!--Setting button on the leftside menu-->
-                        <Button Grid.Column="2" Foreground="{StaticResource WordDarkBlueBrush}" Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeCogIcon}"/>
+                        <!--Setting button on the leftside menu(bind to open a button-->
+                        <Button Grid.Column="2" 
+                                Foreground="{StaticResource WordDarkBlueBrush}" 
+                                Command="{Binding SettingsViewModel.OpenSettingsCommand, 
+                                         Source={x:Static local:ViewModelLocator.Instance}}"
+                                Style="{StaticResource IconButton}" 
+                                Content="{StaticResource FontAwesomeCogIcon}"
+                                
+                                />
                     </Grid>
 
                     <Border Background="{StaticResource ForegroundLightBrush}" 

@@ -124,6 +124,26 @@ namespace SunnyLize.Word
 
 
     /// <summary>
+    /// Animate a framework element sliding up from the bottom show 
+    /// and slide out from the bottom on hide
+    /// Note: We are keeping the margin
+    /// </summary>
+    public class AnimateSlideInFromBottomMarginProperty : AnimateBaseProperty<AnimateSlideInFromBottomMarginProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
+                //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
+                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+            else
+                //otherwise animate out
+                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+
+        }
+    }
+
+    /// <summary>
     /// Animate a framework element fading in on show 
     /// and fading out on hide
     /// </summary>

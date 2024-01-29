@@ -77,7 +77,7 @@ namespace SunnyLize.Word.Core
                 await Task.Delay(1000);
 
                 //Go to chat page
-                IOCContainer.Get<ApplicationViewModel>().GotToPage(ApplicationPage.Chat);
+                IOCContainer.Application.GotToPage(ApplicationPage.Chat);
                 //var email = this.Email;
 
                 ////Note: Never store unsecure [password in variable like this
@@ -95,14 +95,14 @@ namespace SunnyLize.Word.Core
         /// <returns></returns>
         public async Task RegisterAsync()
         {
-            //IOCContainer.Get<ApplicationViewModel>().SideMenuVisible ^= true;
+            //IOCContainer.Application.SideMenuVisible ^= true;
             //return;
 
 
             // go register page
             //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
           
-            IOCContainer.Get<ApplicationViewModel>().GotToPage(ApplicationPage.Register);
+            IOCContainer.Application.GotToPage(ApplicationPage.Register);
             
                 
             await Task.Delay(1);

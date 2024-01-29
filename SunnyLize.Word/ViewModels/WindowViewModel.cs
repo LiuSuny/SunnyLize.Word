@@ -157,6 +157,15 @@ namespace SunnyLize.Word
         /// such as when a popup is visible or the window is not focused
         /// </summary>
         public bool DimmableOverlayVisible { get; set; }
+
+        ///// <summary>
+        ///// True if we should show the setting menu
+        ///// </summary>
+        //public bool SettingsMenuVisible
+        //{
+        //    get => IOCContainer.Application.SettingsMenuVisible;
+        //    set => IOCContainer.Application.SettingsMenuVisible = value;
+        //}
         #endregion
 
 

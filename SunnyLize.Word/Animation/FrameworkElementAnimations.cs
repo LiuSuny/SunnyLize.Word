@@ -73,6 +73,9 @@ namespace SunnyLize.Word.Animation
 
             //wait for it to finish
             await Task.Delay((int)seconds * 1000);
+
+            //make element invisible
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion
@@ -137,12 +140,16 @@ namespace SunnyLize.Word.Animation
 
             //wait for it to finish
             await Task.Delay((int)seconds * 1000);
+
+
+            //make element invisible
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion
 
 
-        #region SlideAnd Fade in and out from BOTTOM
+        #region Slide And Fade in and out from BOTTOM
 
         /// <summary>
         /// Slides an element in from the bottom
@@ -201,6 +208,10 @@ namespace SunnyLize.Word.Animation
 
             //wait for it to finish
             await Task.Delay((int)seconds * 1000);
+
+
+            //make element invisible
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion

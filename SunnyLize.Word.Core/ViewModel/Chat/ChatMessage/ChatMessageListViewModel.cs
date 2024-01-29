@@ -95,16 +95,19 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public /*async*/ void Send()
         {
+
+
             //this UI independent as the core has no idea as we can invoke the UI function
-           /* await*/ IOCContainer.UI.ShowMessage(new MessageBoxDialogViewModel
+            /* await*/
+            IOCContainer.UI.ShowMessage(new MessageBoxDialogViewModel
             {
-                  Title = "Send Message",
-                  Message = "Thank you for writing a nice message :)",
-                  OkText = "OK"
+                Title = "Send Message",
+                Message = "Thank you for writing a nice message :)",
+                OkText = "OK"
             });
 
             //var ss = true;
-            
+
         }
 
         #endregion

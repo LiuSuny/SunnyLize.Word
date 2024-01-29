@@ -82,14 +82,14 @@ namespace SunnyLize.Word.Core
         /// <returns></returns>
         public async Task LoginAsync()
         {
-            //IOCContainer.Get<ApplicationViewModel>().SideMenuVisible ^= true;
+            //IOCContainer.Application.SideMenuVisible ^= true;
             //return;
 
 
             // go register page
             //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
 
-            IOCContainer.Get<ApplicationViewModel>().GotToPage(ApplicationPage.Login);
+            IOCContainer.Application.GotToPage(ApplicationPage.Login);
 
 
             await Task.Delay(1);

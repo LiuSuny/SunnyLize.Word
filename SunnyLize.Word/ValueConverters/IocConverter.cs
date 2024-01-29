@@ -19,7 +19,7 @@ namespace SunnyLize.Word
             switch ((string)parameter)
             {
                 case nameof(ApplicationViewModel):
-                    return IOCContainer.Get<ApplicationViewModel>();
+                    return IOCContainer.Application;
 
                 default:
                     Debugger.Break();

@@ -52,7 +52,7 @@ namespace SunnyLize.Word
             //as the dependency doesn't fire
             if(DesignerProperties.GetIsInDesignMode(this))
            //just for the designer we basically take the currentpage and convert it to basepage just only for the designer
-                NewPage.Content = (BasePage)new ApplicationPageValueConverter().Convert(IOCContainer.Get<ApplicationViewModel>().CurrentPage);
+                NewPage.Content = (BasePage)new ApplicationPageValueConverter().Convert(IOCContainer.Application.CurrentPage);
            
         }
         #endregion

@@ -24,8 +24,19 @@ namespace SunnyLize.Word.Core
         /// shortcut to access the <see cref="IUIManager"/>
         /// </summary>
         public static IUIManager UI => IOCContainer.Get<IUIManager>(); //just a sort of shortcut to reach the IUIManager
+
+        /// <summary>
+        /// shortcut allow us access for shortcut the <see cref="ApplicationViewModel"/>
+        /// </summary>
+        public static ApplicationViewModel Application => IOCContainer.Get<ApplicationViewModel>();  //just a sort of shortcut to reach the ApplicationViewModel
+
+        /// <summary>
+        /// shortcut allow us access for shortcut the <see cref="SettingsViewModel"/>
+        /// </summary>
+        public static SettingsViewModel Settings => IOCContainer.Get<SettingsViewModel>();  //just a sort of shortcut to reach the IUIManager
+
         #endregion
-       
+
 
         #region Construction
         /// <summary>
@@ -44,8 +55,11 @@ namespace SunnyLize.Word.Core
         /// <exception cref="NotImplementedException"></exception>
         private static void BindViewModels()
         {
-            //Bindin =g to a single instance of Application view model
+            //Binding to a single instance of Application view model
             kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel());
+
+            //Binding to a single instance of settings view model
+            kernel.Bind<SettingsViewModel>().ToConstant(new SettingsViewModel()); 
 
 
             //kernel.Bind<ApplicationViewModel>().ToSelf().InSingletonScope(); //meaning creating a single instance of this class ApplicationViewModels

@@ -21,7 +21,12 @@ namespace SunnyLize.Word
         /// <summary>
         /// the appliaction view model
         /// </summary>
-        public static ApplicationViewModel ApplicationViewModel => IOCContainer.Get<ApplicationViewModel>();
+        public static ApplicationViewModel ApplicationViewModel => IOCContainer.Application;
+
+        /// <summary>
+        /// the setting view model
+        /// </summary>
+        public static SettingsViewModel SettingsViewModel => IOCContainer.Settings;
         #endregion
     }
 }
