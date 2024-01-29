@@ -79,6 +79,7 @@
     <Compile Include="Animation\StoryBoardHelpers.cs" />
     <Compile Include="AttachedProperties\BaseAttachedProperty.cs" />
     <Compile Include="AttachedProperties\FrameWorkElementAnimationAttachedProperties.cs" />
+    <Compile Include="AttachedProperties\PenelChildMarginProperty.cs" />
     <Compile Include="AttachedProperties\NoFrameHistory.cs" />
     <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
     <Compile Include="AttachedProperties\ButtonRealAttachedProperties.cs" />
@@ -292,6 +293,9 @@
       <Project>{2d184088-1a91-405a-a000-51cb643e3603}</Project>
       <Name>SunnyLize.Word.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Samples\ParisPix.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />

@@ -3,6 +3,7 @@
 using Newtonsoft.Json.Linq;
 using SunnyLize.Word.Animation;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -24,19 +25,33 @@ namespace SunnyLize.Word
 
         #endregion
 
-       
+        #region Protected Properties
+        /// <summary>
+        /// True if this is the very first time the value has been updated
+        /// used to make sure we run the logic at least once during first load
+        /// </summary>
+        protected bool mFirstFire = true;
+
+        #endregion
         public override void OnvalueUpdated(DependencyObject sender, object value)
         {
             //try to find the framwork element
             if (!(sender is FrameworkElement element)) return;
 
 
-            //don't fire if the vaue doesn't change
-            if (sender.GetValue(ValueProperty) == value && !FirstLoad) return; //if the value doesn't change, then do nothing except if it is the first time
+            //don't fire if the vaue doesn't change and we comparing reason why we cast it directly to boolean else it might fail
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire) return; //if the value doesn't change, then do nothing except if it is the first time
 
+            //No longer first load
+            mFirstFire = false;
             //On first load...
             if(FirstLoad)
             {
+                //if we are to animate initially
+                if(!(bool)value) //animate out by default so animate in
+                //start off hidded animation untill we decide how to animate                
+                element.Visibility = Visibility.Hidden;
+
                 //hooking it to first load on a single file - by creating single self-unhookable event
                 //For the element loaded to the event
                 //RoutedEventHandler onLoaded = (ss, ee) =>
@@ -48,10 +63,15 @@ namespace SunnyLize.Word
                 //practical we create event allow it to run and load, hook to event and there after unhook itself
                 RoutedEventHandler onLoaded = null;   //technically it been assign
                 //created an event
-                onLoaded = (ss, ee) =>
+                onLoaded = async (ss, ee) =>
                 {
+                    
                     //Unhooked ourselves
                     element.Loaded -= onLoaded;
+
+                    //Slight delay after load is needed for some element to get laid out
+                    //and their width/height are correctly calculated
+                    await Task.Delay(5);
 
                     //We doing the desired animation
                     DoAnimation(element, (bool)value);

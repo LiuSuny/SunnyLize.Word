@@ -37,7 +37,8 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
-            //make the pag visiable
+            if (seconds != 0) //make a page visible ony when we are animating
+             //make the pag visiable
             element.Visibility = Visibility.Visible;
 
             //wait for it to finish
@@ -68,7 +69,8 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
-            //make the pag visiable
+            if (seconds != 0) //make a page visible ony when we are animating
+              //make the pag visiable
             element.Visibility = Visibility.Visible;
 
             //wait for it to finish
@@ -105,6 +107,7 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
+            if(seconds != 0) //Making zero invisbile from the start untill it needed
             //make the pag visiable
             element.Visibility = Visibility.Visible;
 
@@ -135,6 +138,7 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
+            if (seconds != 0) //make a page visible ony when we are animating
             //make the pag visiable
             element.Visibility = Visibility.Visible;
 
@@ -172,6 +176,7 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
+            if (seconds != 0) //make a page visible ony when we are animating
             //make the pag visiable
             element.Visibility = Visibility.Visible;
 
@@ -203,6 +208,7 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
+            if(seconds != 0) //make a page visible ony when we are animating
             //make the pag visiable
             element.Visibility = Visibility.Visible;
 
@@ -235,8 +241,9 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
-            //make the pag visiable
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0) //make a page visible ony when we are animating
+             //make the pag visiable
+             element.Visibility = Visibility.Visible;
 
             //wait for it to finish
             await Task.Delay((int)seconds * 1000);
@@ -259,8 +266,9 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
-            //make the pag visiable
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0) //make a page visible ony when we are animating
+             //make the pag visiable
+             element.Visibility = Visibility.Visible;
 
             //wait for it to finish
             await Task.Delay((int)seconds * 1000);
