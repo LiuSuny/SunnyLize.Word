@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace SunnyLize.Word
 {
@@ -25,5 +26,64 @@ namespace SunnyLize.Word
         }
 
        
+    }
+
+
+
+    /// <summary>
+    /// Focus (keyboard focus) this element is true 
+    /// </summary>
+    public class FocusProperty : BaseAttachedProperty<FocusProperty, bool>
+    {
+        /// <summary>
+        /// This class basically allow keyboard focus on whatever object we attach it in our project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public override void OnvalueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            //if we don't have a control return nothing
+            if (!(sender is Control control))
+                return;
+
+            //If this boolean new value is true
+            if((bool)e.NewValue)
+            //then focus on this control
+            control.Focus();
+        }
+
+
+    }
+
+
+
+    /// <summary>
+    /// Focus (keyboard focus) and select all this element if true 
+    /// </summary>
+    public class FocusAndSelectProperty : BaseAttachedProperty<FocusAndSelectProperty, bool>
+    {
+        /// <summary>
+        /// This class basically allow keyboard focus on whatever object we attach it in our project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public override void OnvalueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            //if we don't have a control return nothing           
+            if (!(sender is TextBoxBase control))
+                return;
+
+            //If this boolean new value is true
+            if ((bool)e.NewValue)
+            {
+                //then focus on this control
+                control.Focus();
+
+                //Select Text
+                control.SelectAll();
+            }
+        }
+
+
     }
 }
