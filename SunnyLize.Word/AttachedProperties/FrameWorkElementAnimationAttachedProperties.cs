@@ -3,6 +3,7 @@
 using Newtonsoft.Json.Linq;
 using SunnyLize.Word.Animation;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
@@ -17,38 +18,52 @@ namespace SunnyLize.Word
     public abstract class AnimateBaseProperty<Parent> :BaseAttachedProperty<Parent, bool>
         where Parent : BaseAttachedProperty<Parent, bool>, new()
     {
-        #region public property
-        /// <summary>
-        /// the flag indicating if it is the first the property that have  load
-        /// </summary>
-        public bool FirstLoad { get; set; } = true;
-
-        #endregion
-
+       
         #region Protected Properties
         /// <summary>
         /// True if this is the very first time the value has been updated
         /// used to make sure we run the logic at least once during first load
         /// </summary>
-        protected bool mFirstFire = true;
+        //protected bool mFirstFire = true;
+        protected Dictionary<DependencyObject, bool> mFirstLoadValue = new Dictionary<DependencyObject, bool>();
+        /// <summary>
+        /// the flag indicating if it is the first the property that have  load
+        /// </summary>
+        protected Dictionary<DependencyObject, bool> mAlreadyLoaded = new Dictionary<DependencyObject, bool>();
+        #endregion
 
+        #region public property
+
+        /// <summary>
+        /// the flag indicating if it is the first the property that have  load
+        /// </summary>
+        //public bool FirstLoad { get; set; } = true;
+       
         #endregion
         public override void OnvalueUpdated(DependencyObject sender, object value)
         {
-            //try to find the framwork element
+            //try to get the framwork element
             if (!(sender is FrameworkElement element)) return;
 
 
             //don't fire if the vaue doesn't change and we comparing reason why we cast it directly to boolean else it might fail
-            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire) return; //if the value doesn't change, then do nothing except if it is the first time
+            //if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire)
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && mAlreadyLoaded.ContainsKey(sender))
+                    return; //if the value doesn't change, then do nothing except if it is the first time
 
             //No longer first load
-            mFirstFire = false;
+           // mFirstFire = false;
+
             //On first load...
-            if(FirstLoad)
+           // if(FirstLoad)
+            if (!mAlreadyLoaded.ContainsKey(sender))
             {
-                //if we are to animate initially
-                if(!(bool)value) //animate out by default so animate in
+
+                // Flag that we are in first load but have not finished it
+                mAlreadyLoaded[sender] = false;
+
+                 //if we are to animate initially
+                if (!(bool)value) //animate out by default so animate in
                 //start off hidded animation untill we decide how to animate                
                 element.Visibility = Visibility.Hidden;
 
@@ -74,18 +89,25 @@ namespace SunnyLize.Word
                     await Task.Delay(5);
 
                     //We doing the desired animation
-                    DoAnimation(element, (bool)value);
-
+                    //DoAnimation(element, (bool)value);
+                    DoAnimation(element, mFirstLoadValue.ContainsKey(sender) ? mFirstLoadValue[sender] : (bool)value, true);
+                    
                     //Once we done it no longer in first load
+                    //FirstLoad = false;
 
-                    FirstLoad = false;
+                    // Flag that we have finished first load
+                    mAlreadyLoaded[sender] = true;
                 };
 
                 //Hook into the loaded event of the element
                 element.Loaded += onLoaded;
             }
+               // If we have started a first load but not fired the animation yet, update the property
+            else if (mAlreadyLoaded[sender] == false)
+                    mFirstLoadValue[sender] = (bool)value;
             else 
-                DoAnimation(element, (bool)value);
+               
+                DoAnimation(element, (bool)value, false);
 
         }
 
@@ -94,10 +116,8 @@ namespace SunnyLize.Word
         /// </summary>
         /// <param name="element">the element</param>
         /// <param name="value">the new value</param>
-        protected virtual void DoAnimation(FrameworkElement element, bool value)
-        {
-            
-        }
+       
+        protected virtual void DoAnimation(FrameworkElement element, bool value, bool firstLoad) { }
     }
 
 
@@ -108,15 +128,18 @@ namespace SunnyLize.Word
     /// </summary>
     public class AnimateSlideInFromLeftProperty : AnimateBaseProperty<AnimateSlideInFromLeftProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+       // protected override async void DoAnimation(FrameworkElement element, bool value) 
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
                 //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
-                await element.SlideAndFadeInFromLeft(FirstLoad ? 0 : 0.3f, keepMargin:false);
+                //await element.SlideAndFadeInAsync(firstLoad ? 0 : 0.3f, keepMargin:false);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Left, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
             else
                 //otherwise animate out
-                await element.SlideAndFadeOutToLeft(FirstLoad ? 0 : 0.3f, keepMargin:false);
+                //await element.SlideAndFadeOutToLeft(firstLoad ? 0 : 0.3f, keepMargin:false);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Left, firstLoad ? 0 : 0.3f, keepMargin: false);
 
         }
     }
@@ -129,15 +152,18 @@ namespace SunnyLize.Word
     /// </summary>
     public class AnimateSlideInFromBottomProperty : AnimateBaseProperty<AnimateSlideInFromBottomProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        //protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
                 //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
-                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                //await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
             else
                 //otherwise animate out
-                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                //await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: false);
 
         }
     }
@@ -150,15 +176,18 @@ namespace SunnyLize.Word
     /// </summary>
     public class AnimateSlideInFromBottomMarginProperty : AnimateBaseProperty<AnimateSlideInFromBottomMarginProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+       // protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
                 //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
-                await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                //await element.SlideAndFadeInFromBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: true);
             else
                 //otherwise animate out
-                await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                //await element.SlideAndFadeOutToBottom(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: true);
 
         }
     }
@@ -169,15 +198,18 @@ namespace SunnyLize.Word
     /// </summary>
     public class AnimateFadeInInProperty : AnimateBaseProperty<AnimateFadeInInProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        //protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
                 //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
-                await element.FadeInAsync(FirstLoad ? 0 : 0.3f);
+                //await element.FadeInAsync(FirstLoad ? 0 : 0.3f);
+                await element.FadeInAsync(firstLoad, firstLoad ? 0 : 0.3f);
             else
                 //otherwise animate out
-                await element.FadeOutAsync(FirstLoad ? 0 : 0.3f);
+                //await element.FadeOutAsync(FirstLoad ? 0 : 0.3f);
+                await element.FadeOutAsync(firstLoad ? 0 : 0.3f);
 
         }
     }

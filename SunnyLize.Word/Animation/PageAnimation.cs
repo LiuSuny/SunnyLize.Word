@@ -20,7 +20,7 @@ namespace SunnyLize.Word
         /// <summary>
         /// Page slides out and fade out to the left
         /// </summary>
-        SlideAndFadeInOutToLeft = 2
+        SlideAndFadeOutToLeft = 2
 
     }
 }

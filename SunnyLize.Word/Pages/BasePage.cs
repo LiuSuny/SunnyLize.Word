@@ -25,7 +25,7 @@ namespace SunnyLize.Word
         /// <summary>
         /// The animation that play when the page is unloaded
         /// </summary>
-        public PageAnimation PageUnLoadAnimation { get; set; } = PageAnimation.SlideAndFadeInOutToLeft;
+        public PageAnimation PageUnLoadAnimation { get; set; } = PageAnimation.SlideAndFadeOutToLeft;
 
         /// <summary>
         /// the time the animation take to complete
@@ -97,25 +97,10 @@ namespace SunnyLize.Word
             {
                 case PageAnimation.SlideAndFadeInFromRight:
 
-                    /* Note: we move the following code to seperate classes 
-                    //var sb = new Storyboard();
-                    //var slideAnimation = new ThicknessAnimation
-                    //{
-                    //    Duration = new Duration(TimeSpan.FromSeconds(this.SlideSeconds)),
-                    //    From = new Thickness(this.WindowWidth, 0, -this.WindowWidth, 0),
-                    //    To = new Thickness(0),
-                    //    DecelerationRatio = 0.9f
-                    //};
-                    //Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("Margin"));
-                    //sb.Children.Add(slideAnimation);
-                    //sb.Begin(this);
-
-                    //this.Visibility = Visibility.Visible;
-                    //await Task.Delay((int)(this.SlideSeconds * 1000));
-                    */
-
+                    
                     //start the animation
-                    await this.SlideAndFadeInFromRight(SlideSeconds, width: (int)Application.Current.MainWindow.Width); //we can decide to remove the *5 and it will slide in faster
+                   // await this.SlideAndFadeInFromRight(SlideSeconds, width: (int)Application.Current.MainWindow.Width); //we can decide to remove the *5 and it will slide in faster
+                    await this.SlideAndFadeInAsync(AnimationSlideInDirection.Right, false, SlideSeconds, size: (int)Application.Current.MainWindow.Width);
                     break;
             }
         }
@@ -131,10 +116,12 @@ namespace SunnyLize.Word
                 return;
             switch (PageUnLoadAnimation)
             {
-                case PageAnimation.SlideAndFadeInOutToLeft:
+                case PageAnimation.SlideAndFadeOutToLeft:
 
                     //start the animation
-                    await this.SlideAndFadeOutToLeft(SlideSeconds /*width: (int)Application.Current.MainWindow.Width*/); //we can decide to remove the *5 and it will slide in faster
+                    //await this.SlideAndFadeOutToLeft(SlideSeconds /*width: (int)Application.Current.MainWindow.Width*/); //we can decide to remove the *5 and it will slide in faster
+                    await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, /*false,*/ SlideSeconds);
+
                     break;
             }
         }
