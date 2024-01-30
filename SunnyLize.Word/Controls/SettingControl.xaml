@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SunnyLize.Word"
-             xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"
-             mc:Ignorable="d">
+             xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"            
+             mc:Ignorable="d"
+             d:DataContext="{x:Static core:SettingsDesignModel.Instance}">
           
 
     <Border Background="{StaticResource ForegroundLightBrush}"
@@ -85,13 +86,17 @@
                 </Grid>
                                               
                 <!--several way to padding using class local:PenelChildMarginProperty.Value="5-->
-                <!--Profile Details-->
+                <!--Profile Details Note: using DI Gridlength we now have control ove the width column of user name (textentrycontrol.cs)-->
 
-                <StackPanel Grid.Column="1">
-                    <local:TextEntryControl/>
-                    <local:TextEntryControl/>
-                    <local:TextEntryControl/>
-                    <local:TextEntryControl/>
+                <StackPanel Grid.Column="1"
+                            local:TextEntryWidthMatcherProperty.Value="True"
+                            >
+                    
+                    <local:TextEntryControl DataContext="{Binding Name}"/>
+                    <local:TextEntryControl DataContext="{Binding Username}"/>
+                    <local:TextEntryControl DataContext="{Binding Password}"/>
+                    <local:TextEntryControl DataContext="{Binding Email}"/>
+                
                 </StackPanel>
                 
             </Grid>

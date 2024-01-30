@@ -99,8 +99,10 @@ namespace SunnyLize.Word.Core
         private void Save()
         {
             //TODO: save the content because no server or backend yet todo later on 
-
+            //Label = EditedText; //playing around
+            
             OriginalText = EditedText;
+
             Editing = false;
         }
         #endregion

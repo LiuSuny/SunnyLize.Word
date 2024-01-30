@@ -6,14 +6,16 @@
              xmlns:local="clr-namespace:SunnyLize.Word"
              xmlns:core="clr-namespace:SunnyLize.Word.Core;assembly=SunnyLize.Word.Core"
              mc:Ignorable="d"
-             DataContext="{x:Static core:TextEntryDesignModel.Instance}"
+             d:DataContext="{x:Static core:TextEntryDesignModel.Instance}"
              >
    <!--Grey underline (d: infront of our datacontext means a design time )-->
     <Border BorderBrush="{StaticResource ForegroundDarkBrush}"
             BorderThickness="0 0 0 0.5">
         
         <Grid Background="{StaticResource ForegroundLightBrush}">
+
            
+            
             <!--Hover over to show edit button-->
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
@@ -42,7 +44,7 @@
                 
             <!--Label-> Name ->Button -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition x:Name="LabelColumnDefintion" Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
@@ -50,13 +52,16 @@
             <!--Label-->
             <TextBlock Text="{Binding Label}"
                        Margin="15 12"
+                       x:Name="Label" 
+                       HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        FontFamily="{StaticResource LatoRegular}"
                        />
-
+                      
             <!--Edit content  local:FocusProperty.Value="{Binding Editing}"-->
-            <TextBox Text="{Binding EditedText}"
+            <TextBox Text="{Binding EditedText, UpdateSourceTrigger=PropertyChanged}"
                        Grid.Column="1"
+                       Opacity="0"
                        local:AnimateFadeInInProperty.Value="{Binding Editing}"                    
                        local:FocusAndSelectProperty.Value="{Binding Editing}"
                        FontSize="{StaticResource FontSizeRegular}"
@@ -125,6 +130,9 @@
 
 
             </StackPanel>
+            <Grid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding EditCommand}"/>
+            </Grid.InputBindings>
         </Grid>
     </Border>
 </UserControl>

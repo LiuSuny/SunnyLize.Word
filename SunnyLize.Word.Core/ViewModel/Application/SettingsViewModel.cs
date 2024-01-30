@@ -21,7 +21,7 @@ namespace SunnyLize.Word.Core
         /// <summary>
         /// The current username
         /// </summary>
-        public TextEntryViewModel Userame { get; set; }
+        public TextEntryViewModel Username { get; set; }
 
         /// <summary>
         /// The user password
@@ -59,6 +59,12 @@ namespace SunnyLize.Word.Core
             //CloseSettingsCommand = new RelayCommand(()=>Open());
             CloseSettingsCommand = new RelayCommand(Close);
             OpenSettingsCommand = new RelayCommand(Open);
+
+            //TODO: Remove this with real information pulled out from our data base in the future
+            Name = new TextEntryViewModel { Label = "Name", OriginalText = "Luke Rowland" };
+            Username = new TextEntryViewModel { Label = "Usernname", OriginalText = "Luke" };
+            Password = new TextEntryViewModel { Label = "Password", OriginalText = "*******" };
+            Email = new TextEntryViewModel { Label = "Email", OriginalText = "johndoe@gmail.com" };
         }
         #endregion
 
