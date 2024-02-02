@@ -55,7 +55,7 @@ namespace SunnyLize.Word
            // mFirstFire = false;
 
             //On first load...
-           // if(FirstLoad)
+           
             if (!mAlreadyLoaded.ContainsKey(sender))
             {
 

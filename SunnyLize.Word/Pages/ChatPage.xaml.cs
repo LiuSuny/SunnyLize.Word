@@ -22,11 +22,24 @@ namespace SunnyLize.Word
     /// </summary>
     public partial class ChatPage : BasePage<ChatMessageListViewModel>
     {
-        public ChatPage()
+        /// <summary>
+        /// Default ctor
+        /// </summary>
+        public ChatPage() :base()
         {
             InitializeComponent();
            
         }
-       
+
+        /// <summary>
+        /// ctor with prameter
+        /// </summary>
+        /// <param name="specificViewModel"></param>
+
+        public ChatPage(ChatMessageListViewModel specificViewModel = null) : base(specificViewModel)
+        {
+            InitializeComponent();
+
+        }
     }
 }

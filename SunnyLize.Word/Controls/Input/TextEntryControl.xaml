@@ -58,7 +58,7 @@
                        FontFamily="{StaticResource LatoRegular}"
                        />
                       
-            <!--Edit content  local:FocusProperty.Value="{Binding Editing}"-->
+            <!--Edit content  local:FocusProperty.Value="{Binding Editing} ->when you hover over text and give u info is call tooltip"-->
             <TextBox Text="{Binding EditedText, UpdateSourceTrigger=PropertyChanged}"
                        Grid.Column="1"
                        Opacity="0"
@@ -66,7 +66,7 @@
                        local:FocusAndSelectProperty.Value="{Binding Editing}"
                        FontSize="{StaticResource FontSizeRegular}"
                        Padding="2"                 
-                       Margin="10 10 15 8"
+                       Margin="10 10 15 8"                      
                        />
             
             <!--Content-->
@@ -75,6 +75,7 @@
                        Margin="15 8"
                        local:AnimateFadeInInProperty.Value="{Binding Editing, Converter={local:BooleanInVertConverter}}"
                        VerticalAlignment="Center"
+                       ToolTip="{Binding OriginalText}"
                        />
 
             <!-- Edit Button Container-->

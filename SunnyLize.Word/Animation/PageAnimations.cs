@@ -23,11 +23,11 @@ namespace SunnyLize.Word
             //created the storyboard
             var sb = new Storyboard();
 
-            //add fade in animation
-            sb.AddFadeIn(seconds);
-
             //Add slide from right animation
             sb.AddSlideFromRight(seconds, page.WindowWidth);
+
+            //add fade in animation
+            sb.AddFadeIn(seconds);          
 
             //start animating
             sb.Begin(page);

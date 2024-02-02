@@ -21,7 +21,7 @@ namespace SunnyLize.Word
                 return Visibility.Collapsed;
 
             //Try convert parameter string to enum
-            if (!Enum.TryParse(parameter as string, out MenuItemType type)) //is this fail to convert then return visibility collaspsed -invisibile
+            if (!Enum.TryParse(parameter as string, out MenuItemType type)) //if this fail to convert then return visibility collaspsed -invisibile
                 return Visibility.Collapsed;
 
             //Otherwise if the parameter matches the type return visible

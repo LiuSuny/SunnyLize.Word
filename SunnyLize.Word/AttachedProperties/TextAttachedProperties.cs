@@ -70,17 +70,33 @@ namespace SunnyLize.Word
         public override void OnvalueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             //if we don't have a control return nothing           
-            if (!(sender is TextBoxBase control))
-                return;
-
-            //If this boolean new value is true
-            if ((bool)e.NewValue)
+            if (sender is TextBoxBase control)
             {
-                //then focus on this control
-                control.Focus();
 
-                //Select Text
-                control.SelectAll();
+                //If this boolean new value is true
+                if ((bool)e.NewValue)
+                {
+                    //then focus on this control
+                    control.Focus();
+
+                    //Select Text
+                    control.SelectAll();
+                }
+            }
+
+            //if we don't have a control return nothing           
+            if ((sender is PasswordBox password))
+            {
+
+                //If this boolean new value is true
+                if ((bool)e.NewValue)
+                {
+                    //then focus on this control
+                    password.Focus();
+
+                    //Select Text
+                    password.SelectAll();
+                }
             }
         }
 

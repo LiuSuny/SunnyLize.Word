@@ -22,9 +22,9 @@ namespace SunnyLize.Word
         /// <summary>
         /// The current page to show in the host page
         /// </summary>
-        public BasePage CurrentPage
+        public ApplicationPage CurrentPage
         {
-            get => (BasePage)GetValue(CurrentPageProperty);
+            get => (ApplicationPage)GetValue(CurrentPageProperty);
             set => SetValue(CurrentPageProperty, value);
         }
 
@@ -34,8 +34,28 @@ namespace SunnyLize.Word
         /// </summary>
 
         public static readonly DependencyProperty CurrentPageProperty =
-           DependencyProperty.Register(nameof(CurrentPage), typeof(BasePage), typeof(PageHost),
-               new UIPropertyMetadata(CurrentPagePropertyChanged));
+           DependencyProperty.Register(nameof(CurrentPage), typeof(ApplicationPage), typeof(PageHost),
+               new UIPropertyMetadata(default(ApplicationPage), null, CurrentPagePropertyChanged));
+
+
+
+        /// <summary>
+        /// The current page to show in the host page
+        /// </summary>
+        public BaseViewModel CurrentPageViewModel
+        {
+            get => (BaseViewModel)GetValue(CurrentPageViewModelProperty);
+            set => SetValue(CurrentPageViewModelProperty, value);
+        }
+
+        /// <summary>
+        /// Register <see cref="CurrentPageViewModel"/> as a dependency property
+        /// Using a DependencyProperty as the backing store for CurrentPage.  This enables animation, styling, binding, etc...
+        /// </summary>
+
+        public static readonly DependencyProperty CurrentPageViewModelProperty =
+           DependencyProperty.Register(nameof(CurrentPageViewModel), typeof(BaseViewModel), typeof(PageHost),
+               new UIPropertyMetadata());
 
 
         #endregion
@@ -50,9 +70,9 @@ namespace SunnyLize.Word
 
             //If we are in design mode show the cureent page
             //as the dependency doesn't fire
-            if(DesignerProperties.GetIsInDesignMode(this))
-           //just for the designer we basically take the currentpage and convert it to basepage just only for the designer
-                NewPage.Content = (BasePage)new ApplicationPageValueConverter().Convert(IOCContainer.Application.CurrentPage);
+            if (DesignerProperties.GetIsInDesignMode(this))
+                //just for the designer we basically take the currentpage and convert it to basepage just only for the designer
+                NewPage.Content = IOCContainer.Application.CurrentPage.ToBasePage();
            
         }
         #endregion
@@ -64,11 +84,27 @@ namespace SunnyLize.Word
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void CurrentPagePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static object CurrentPagePropertyChanged(DependencyObject d, object value)
         {
+            //Get current value
+            var currentPage = (ApplicationPage)d.GetValue(CurrentPageProperty);
+            var currentPageViewModel = d.GetValue(CurrentPageViewModelProperty);
+
             //Getting the frame
-            var newPageFrame = (d as PageHost).NewPage; 
+            var newPageFrame = (d as PageHost).NewPage;
             var oldPageFrame = (d as PageHost).OldPage;
+
+            //if the currentpage has not change then just update the view model 
+            if (newPageFrame.Content is BasePage page
+                && page.ToApplicationPage() == currentPage)
+
+            {
+                //just update the view model
+                page.ViewModelObject = currentPageViewModel;
+
+                return value;
+            }
+
 
             //Next we store the current page content as the old page
             var oldePageContent = newPageFrame.Content;
@@ -99,8 +135,9 @@ namespace SunnyLize.Word
             }
 
             //setting up the new page content
-            newPageFrame.Content = e.NewValue;
+            newPageFrame.Content = currentPage.ToBasePage(currentPageViewModel);
 
+            return value;
         } 
         #endregion
 

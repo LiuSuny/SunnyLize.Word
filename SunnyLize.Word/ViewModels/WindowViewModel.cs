@@ -66,9 +66,9 @@ namespace SunnyLize.Word
         //public int ResizeBorder => Borderless ? 0 : 6; //{ get { return Borderless ? 0 : 6; } } 
 
         /// <summary>
-        /// The size of the resize border around the window
+        /// The size of the resize border around the window and it help with max and minimize with window using mouse
         /// </summary>
-        public int ResizeBorder => 10;
+        public int ResizeBorder => mWindow.WindowState == WindowState.Maximized ? 0 : 10;
 
         /// <summary>
         /// The size of the resize border around the window taking into account the outermargin

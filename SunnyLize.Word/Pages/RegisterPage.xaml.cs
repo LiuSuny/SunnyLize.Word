@@ -22,12 +22,27 @@ namespace SunnyLize.Word
     /// </summary>
     public partial class RegisterPage : BasePage<RegisterViewModel>, IHavePassword
     {
+        #region Constructor
+        /// <summary>
+        /// default ctor
+        /// </summary>
         public RegisterPage()
         {
             InitializeComponent();
 
-            
+
         }
+
+        /// <summary>
+        /// ctor with specific view model
+        /// </summary>
+        public RegisterPage(RegisterViewModel specificViewModel) :base(specificViewModel)
+        {
+            InitializeComponent();
+
+
+        }
+        #endregion
         /// <summary>
         /// The secure password for this login page
         /// </summary>

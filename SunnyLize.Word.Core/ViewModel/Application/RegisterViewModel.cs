@@ -89,7 +89,7 @@ namespace SunnyLize.Word.Core
             // go register page
             //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
 
-            IOCContainer.Application.GotToPage(ApplicationPage.Login);
+            IOCContainer.Application.GoToPage(ApplicationPage.Login);
 
 
             await Task.Delay(1);

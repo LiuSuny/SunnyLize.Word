@@ -15,6 +15,6 @@ namespace SunnyLize.Word.Core
         /// <summary>
         /// the text for ok button
         /// </summary>
-        public string OkText { get; set; }
+        public string OkText { get; set; } = "Ok";
     }
 }

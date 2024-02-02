@@ -14,6 +14,8 @@
                    Foreground="{StaticResource ForegroundVeryDarkBrush}"/>
           <!--Another way of making our button Click="Button_Click"-->
         <Button Content="{Binding OkText}"
+                IsDefault="True"
+                IsCancel="True"
                 FontSize="{StaticResource FontSizeRegular}"
                Command="{Binding CloseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:BaseDialogUserControl}}}"
                 HorizontalAlignment="Center"

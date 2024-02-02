@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Security;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace SunnyLize.Word.Core
@@ -74,10 +75,20 @@ namespace SunnyLize.Word.Core
             // LoginIsRunning = true;
             await RunCommandAsync(() =>this.LoginIsRunning, async () =>
             {
+                //TODO : Fake a login
                 await Task.Delay(1000);
 
+                //Ok successfuly logged in..now get the user data
+
+                //TODO : Ask the server or the user info
+                //TODO: Remove this with real information pulled out from our data base in the future
+                IOCContainer.Settings.Name = new TextEntryViewModel { Label = "Name", OriginalText = $"Luke Rowland {DateTime.Now.ToLocalTime()}" };
+                IOCContainer.Settings.Username = new TextEntryViewModel { Label = "Usernname", OriginalText = "Luke" };
+                IOCContainer.Settings.Password = new PasswordEntryViewModel { Label = "Password", FakePassword = "********" };
+                IOCContainer.Settings.Email = new TextEntryViewModel { Label = "Email", OriginalText = "johndoe@gmail.com" };
+
                 //Go to chat page
-                IOCContainer.Application.GotToPage(ApplicationPage.Chat);
+                IOCContainer.Application.GoToPage(ApplicationPage.Chat);
                 //var email = this.Email;
 
                 ////Note: Never store unsecure [password in variable like this
@@ -102,7 +113,7 @@ namespace SunnyLize.Word.Core
             // go register page
             //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
           
-            IOCContainer.Application.GotToPage(ApplicationPage.Register);
+            IOCContainer.Application.GoToPage(ApplicationPage.Register);
             
                 
             await Task.Delay(1);

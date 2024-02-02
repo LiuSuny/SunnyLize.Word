@@ -1,12 +1,19 @@
 ﻿
 
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
+
 namespace SunnyLize.Word.Core
 {
+   
     /// <summary>
     /// A view model for each chat list item in the overview chat list
     /// </summary>
-    public class ChatListItemViewModel:  BaseViewModel
+    public class ChatListItemViewModel : BaseViewModel
     {
+
+        #region Public Properties
         /// <summary>
         /// The display name of the chat list
         /// </summary>
@@ -37,5 +44,118 @@ namespace SunnyLize.Word.Core
         /// True if the item is currently selected
         /// </summary>
         public bool IsSelected { get; set; }
+        
+        #endregion
+
+        #region Public Command
+        /// <summary>
+        /// Open current message thread
+        /// </summary>
+        public ICommand OpenMessageCommand { get; set; }
+
+        // public ICommand CloseMessageCommand { get; set; }
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// default ctor
+        /// </summary>
+        public ChatListItemViewModel()
+        {
+            //Create a command
+            OpenMessageCommand = new RelayCommand(OpenMessage);
+        }
+        #endregion
+
+
+        #region Command Method
+         
+        public void OpenMessage ()
+        {
+
+            if (Name == "Jesse")
+            {
+                IOCContainer.Application.GoToPage(ApplicationPage.Login, new LoginViewModel
+                {
+                    Email = "Jesse@HelloWorld.com"
+
+
+                });
+
+                return;
+            }
+            IOCContainer.Application.GoToPage(ApplicationPage.Chat, new ChatMessageListViewModel
+            {
+                Items = new List<ChatMessageListItemViewModel>
+                {
+                    new ChatMessageListItemViewModel
+                    {
+                        Message = Message,
+                        Initials = Initials,
+                        MessageSentTime = DateTime.UtcNow,
+                        ProfilePictureRGB = "FF00FF",
+                        SenderName = "Luke",
+                        SentByMe = true,
+
+                    },
+
+                     new ChatMessageListItemViewModel
+                    {
+                        Message = "A recieve message",
+                        Initials = Initials,
+                        MessageSentTime = DateTime.UtcNow,
+                        ProfilePictureRGB = "FF0000",
+                        SenderName = "Parnell",
+                        SentByMe = false,
+
+                    },
+
+                      new ChatMessageListItemViewModel
+                    {
+                        Message = "A recieve message",
+                        Initials = Initials,
+                        MessageSentTime = DateTime.UtcNow,
+                        ProfilePictureRGB = "FF0000",
+                        SenderName = "Parnell",
+                        SentByMe = false,
+
+                    },
+
+                       new ChatMessageListItemViewModel
+                    {
+                        Message = Message,
+                        Initials = Initials,
+                        MessageSentTime = DateTime.UtcNow,
+                        ProfilePictureRGB = "FF00FF",
+                        SenderName = "Luke",
+                        SentByMe = true,
+
+                    },
+
+                     new ChatMessageListItemViewModel
+                    {
+                        Message = "A recieve message",
+                        Initials = Initials,
+                        MessageSentTime = DateTime.UtcNow,
+                        ProfilePictureRGB = "FF0000",
+                        SenderName = "Parnell",
+                        SentByMe = false,
+
+                    },
+
+                      new ChatMessageListItemViewModel
+                    {
+                        Message = "A recieve message",
+                        Initials = Initials,
+                        MessageSentTime = DateTime.UtcNow,
+                        ProfilePictureRGB = "FF0000",
+                        SenderName = "Parnell",
+                        SentByMe = false,
+
+                    },
+                }
+            });
+        }
+        #endregion
     }
 }

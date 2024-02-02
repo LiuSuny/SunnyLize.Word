@@ -69,7 +69,9 @@
         
         
         <!--ChatList-->
-        <local:ChatMessageListControl Grid.Row="1"/>
+        <local:ChatMessageListControl Grid.Row="1"
+                                      DataContext="{Binding}"
+                                      />
         
         <!--Attache menu popup-->
         <local:BubbleContent 

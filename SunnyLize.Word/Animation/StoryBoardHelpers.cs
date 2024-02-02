@@ -25,19 +25,20 @@ namespace SunnyLize.Word
         public static void AddSlideFromLeft(this Storyboard storyboard,
             float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
         {
-            //created margin animation from right
-            var Animation = new ThicknessAnimation
+            // Create the margin animate from right 
+            var animation = new ThicknessAnimation
             {
-                //Note: when animating from the left we start from negative (-offset) lefthand and slide to zero 
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = new Thickness(-offset, 0, keepMargin ? offset : 0, 0),
                 To = new Thickness(0),
                 DecelerationRatio = decelerationRatio
             };
-            //setting the target property name
-            Storyboard.SetTargetProperty(Animation, new PropertyPath("Margin"));
-            //add this to the storyboard
-            storyboard.Children.Add(Animation);
+
+            // Set the target property name
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
+            storyboard.Children.Add(animation);
         }
 
       
@@ -53,18 +54,20 @@ namespace SunnyLize.Word
         public static void AddSlideToLeft(this Storyboard storyboard,
             float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
         {
-            //created margin animation from right
-            var Animation = new ThicknessAnimation
+            // Create the margin animate from right 
+            var animation = new ThicknessAnimation
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = new Thickness(0),
                 To = new Thickness(-offset, 0, keepMargin ? offset : 0, 0),
                 DecelerationRatio = decelerationRatio
             };
-            //setting the target property name
-            Storyboard.SetTargetProperty(Animation, new PropertyPath("Margin"));
-            //add this to the storyboard
-            storyboard.Children.Add(Animation);
+
+            // Set the target property name
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
+            storyboard.Children.Add(animation);
         }
 
         #endregion
@@ -83,18 +86,20 @@ namespace SunnyLize.Word
         public static void AddSlideFromRight(this Storyboard storyboard,
             float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
         {
-            //created margin animation from right
-            var Animation = new ThicknessAnimation
+            // Create the margin animate from right 
+            var animation = new ThicknessAnimation
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = new Thickness(keepMargin ? offset : 0, 0, -offset, 0),
                 To = new Thickness(0),
                 DecelerationRatio = decelerationRatio
             };
-            //setting the target property name
-            Storyboard.SetTargetProperty(Animation, new PropertyPath("Margin"));
-            //add this to the storyboard
-            storyboard.Children.Add(Animation);
+
+            // Set the target property name
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
+            storyboard.Children.Add(animation);
         }
 
 
@@ -109,18 +114,20 @@ namespace SunnyLize.Word
         public static void AddSlideToRight(this Storyboard storyboard,
            float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
         {
-            //created margin animation from right
-            var Animation = new ThicknessAnimation
+            // Create the margin animate from right 
+            var animation = new ThicknessAnimation
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = new Thickness(0),
                 To = new Thickness(keepMargin ? offset : 0, 0, -offset, 0),
                 DecelerationRatio = decelerationRatio
             };
-            //setting the target property name
-            Storyboard.SetTargetProperty(Animation, new PropertyPath("Margin"));
-            //add this to the storyboard
-            storyboard.Children.Add(Animation);
+
+            // Set the target property name
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
+            storyboard.Children.Add(animation);
         }
 
         #endregion

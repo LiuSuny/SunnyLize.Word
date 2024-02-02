@@ -97,7 +97,7 @@ namespace SunnyLize.Word.Animation
         ///  <param name="width">The animation width  to animate to, if not specified the element width is use</param>
         /// <returns></returns>
         //public static async Task SlideAndFadeOutToLeft(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
-         public static async Task SlideAndFadeOutAsync(this FrameworkElement element, AnimationSlideInDirection direction,/* bool firstLoad,*/ float seconds = 0.3f, bool keepMargin = true, int size = 0)
+         public static async Task SlideAndFadeOutAsync(this FrameworkElement element, AnimationSlideInDirection direction, float seconds = 0.3f, bool keepMargin = true, int size = 0)
         {
            
             //created the storyboard
@@ -364,7 +364,7 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
-           //make a page visible ony when we are animating
+           //make a page visible only when we are animating
              if (seconds != 0 || firstLoad)
               //make the pag visiable
             element.Visibility = Visibility.Visible;
@@ -380,7 +380,7 @@ namespace SunnyLize.Word.Animation
         /// <param name="element">element to animate</param>
         /// <param name="seconds">the time the animation will take</param>
         /// <returns></returns>
-        public static async Task FadeOutAsync(this FrameworkElement element, /*bool firstLoad,*/ float seconds = 0.3f)
+        public static async Task FadeOutAsync(this FrameworkElement element, float seconds = 0.3f)
         {
             //created the storyboard
             var sb = new Storyboard();
@@ -390,7 +390,7 @@ namespace SunnyLize.Word.Animation
             //start animating
             sb.Begin(element);
 
-            if (seconds != 0) //make a page visible ony when we are animating
+            if (seconds != 0) //make a page visible only when we are animating
              //make the pag visiable
              element.Visibility = Visibility.Visible;
 

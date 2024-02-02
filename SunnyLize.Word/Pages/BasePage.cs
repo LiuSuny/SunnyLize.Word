@@ -16,6 +16,15 @@ namespace SunnyLize.Word
     /// </summary>
     public class BasePage: UserControl
     {
+
+        #region Private memeber
+        /// <summary>
+        /// View models associated with this page
+        /// </summary>
+        private object mViewModel { get; set; }
+
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// The animation that play when the page is first loaded
@@ -37,6 +46,28 @@ namespace SunnyLize.Word
         /// usefull for when we are moving the page to another frame
         /// </summary>
         public bool ShouldAnimateOut { get; set; }
+
+        
+
+        /// <summary>
+        /// View models associated with this page
+        /// </summary>
+        public object ViewModelObject
+        {
+            get { return mViewModel; }
+            set
+            {
+                //if nothing change, return nothing
+                if (mViewModel == value)
+                    return;
+                //otherwise update the value
+                mViewModel = value;
+
+                //set our datacontext to viewmodel on this page
+                this.DataContext = mViewModel;
+            }
+        }
+
         #endregion
 
 
@@ -51,11 +82,11 @@ namespace SunnyLize.Word
                 return; //this basically mean if we are in design time don't bother animating
 
             //if we are animating in, hide to begin with
-            if (this.PageLoadAnimation != PageAnimation.None)
-                this.Visibility = Visibility.Collapsed;
+            if (PageLoadAnimation != PageAnimation.None)
+                Visibility = Visibility.Collapsed;
 
             //Listening out for the page loaded
-            this.Loaded += BasePage_Loaded;
+            Loaded += BasePage_Loaded;
           
             
         }
@@ -93,6 +124,7 @@ namespace SunnyLize.Word
             //Trying to make sure we have something to do
             if (PageLoadAnimation == PageAnimation.None)
                 return;
+
             switch (PageLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInFromRight:
@@ -114,13 +146,14 @@ namespace SunnyLize.Word
             //Trying to make sure we have something to do
             if (PageUnLoadAnimation == PageAnimation.None)
                 return;
+
             switch (PageUnLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeOutToLeft:
 
                     //start the animation
                     //await this.SlideAndFadeOutToLeft(SlideSeconds /*width: (int)Application.Current.MainWindow.Width*/); //we can decide to remove the *5 and it will slide in faster
-                    await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, /*false,*/ SlideSeconds);
+                    await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Left, SlideSeconds);
 
                     break;
             }
@@ -142,48 +175,54 @@ namespace SunnyLize.Word
     public class BasePage<VM>: BasePage
         where VM : BaseViewModel, new()
     {
-        
-        #region Private memeber
-        /// <summary>
-        /// View models associated with this page
-        /// </summary>
-        private VM mViewModel { get; set; }
 
-        #endregion
+
 
         #region Public Properties
-      
         /// <summary>
-        /// View models associated with this page
+        /// The view model associated with this page
         /// </summary>
-        public VM ViewModel 
-        { get { return mViewModel; }
-            set
-            {
-                //if nothing change, return nothing
-                if (mViewModel == value)
-                    return;
-                //otherwise update the value
-                mViewModel = value;
+        public VM ViewModel
+        {
+            get => (VM)ViewModelObject;
 
-                //set our datacontext to viewmodel on this page
-                this.DataContext = mViewModel;
-            }
+            set => ViewModelObject = value;
         }
+            
         #endregion
 
         #region Constructor
         /// <summary>
         /// Default ctor
         /// </summary>
+
         public BasePage() : base()
         {
-           
-            //create a default ViewModel
-          this.ViewModel = new VM();
+
+            //Otherwise we create a default ViewModel
+            this.ViewModel = IOCContainer.Get<VM>();
+        }
+
+
+        /// <summary>
+        /// ctor with arguments
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use if any</param>
+        public BasePage(VM specificViewModel = null) : base()
+        {
+
+
+            // this.ViewModel = new VM();
+
+            //set the specific view model
+            if (specificViewModel != null)
+                ViewModel = specificViewModel;
+            else
+            //Otherwise we create a default ViewModel
+            this.ViewModel = IOCContainer.Get<VM>();
         }
         #endregion
 
-       
+
     }
 }

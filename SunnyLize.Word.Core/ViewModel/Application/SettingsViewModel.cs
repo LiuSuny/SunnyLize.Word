@@ -26,12 +26,17 @@ namespace SunnyLize.Word.Core
         /// <summary>
         /// The user password
         /// </summary>
-        public TextEntryViewModel Password { get; set; }
+        public PasswordEntryViewModel Password { get; set; }
 
         /// <summary>
         /// The user email
         /// </summary>
         public TextEntryViewModel Email { get; set; }
+
+        /// <summary>
+        /// Text for a logout button inside setting
+        /// </summary>
+        public string LogoutButtonText { get; set; }
         #endregion
 
         #region Public Command
@@ -46,6 +51,15 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public ICommand OpenSettingsCommand { get; set; }
 
+        /// <summary>
+        /// Command to logout setting menu out of application
+        /// </summary>
+        public ICommand LogoutSettingsCommand { get; set; }
+
+        /// <summary>
+        /// Command to clears user data from the view model
+        /// </summary>
+        public ICommand ClearUserDataCommand { get; set; }
         #endregion
 
 
@@ -59,12 +73,19 @@ namespace SunnyLize.Word.Core
             //CloseSettingsCommand = new RelayCommand(()=>Open());
             CloseSettingsCommand = new RelayCommand(Close);
             OpenSettingsCommand = new RelayCommand(Open);
+            LogoutSettingsCommand = new RelayCommand(Logout);
+            ClearUserDataCommand = new RelayCommand(ClearUserData);
 
-            //TODO: Remove this with real information pulled out from our data base in the future
+
+
+            ////TODO: Remove this with real information pulled out from our data base in the future
             Name = new TextEntryViewModel { Label = "Name", OriginalText = "Luke Rowland" };
             Username = new TextEntryViewModel { Label = "Usernname", OriginalText = "Luke" };
-            Password = new TextEntryViewModel { Label = "Password", OriginalText = "*******" };
+            Password = new PasswordEntryViewModel { Label = "Password", FakePassword = "********" };
             Email = new TextEntryViewModel { Label = "Email", OriginalText = "johndoe@gmail.com" };
+
+            //TODO : to get from localization
+            LogoutButtonText = "Logout";
         }
         #endregion
 
@@ -90,6 +111,35 @@ namespace SunnyLize.Word.Core
 
             //close the settings menu
             IOCContainer.Application.SettingsMenuVisible = false;
+        }
+
+        /// <summary>
+        /// Log the user out
+        /// </summary>
+        private void Logout()
+        {
+            //TODO: confirm the user wants to logout
+
+            //TODO: we clear every user data/cache
+
+            //Finally we clean all application level view models that contain
+            //any information about the current user
+            ClearUserData();
+
+            //logout the user settings menu and move back to login page
+            IOCContainer.Application.GoToPage(ApplicationPage.Login);
+        }
+
+        /// <summary>
+        /// Clear any user data specific  to the current user once they logout
+        /// </summary>
+        private void ClearUserData()
+        {
+            //Clear al view models containing the user info
+            Name = null;
+            Username = null;
+            Password = null;
+            Email = null;
         }
         #endregion
     }
