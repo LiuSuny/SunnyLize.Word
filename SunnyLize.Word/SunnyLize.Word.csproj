@@ -80,6 +80,8 @@
     <Compile Include="Animation\StoryBoardHelpers.cs" />
     <Compile Include="AttachedProperties\BaseAttachedProperty.cs" />
     <Compile Include="AttachedProperties\FrameWorkElementAnimationAttachedProperties.cs" />
+    <Compile Include="AttachedProperties\ClipFromBorderProperty.cs" />
+    <Compile Include="AttachedProperties\ScrollViewerAttachProperties.cs" />
     <Compile Include="AttachedProperties\TextEntryWidthMatcherProperty.cs" />
     <Compile Include="AttachedProperties\PenelChildMarginProperty.cs" />
     <Compile Include="AttachedProperties\NoFrameHistory.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="ValueConverters\ApplicationPageHelpers.cs" />
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
     <Compile Include="ValueConverters\BooleanInVertConverter.cs" />
+    <Compile Include="ValueConverters\BooleanToVisibilityGoneConverter.cs" />
     <Compile Include="ValueConverters\HorizontalAlignmentConverter.cs" />
     <Compile Include="ValueConverters\IconTypeToFontAwesomeConverter.cs" />
     <Compile Include="ValueConverters\IocConverter.cs" />

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace SunnyLize.Word.Core
@@ -86,7 +87,7 @@ namespace SunnyLize.Word.Core
             }
             IOCContainer.Application.GoToPage(ApplicationPage.Chat, new ChatMessageListViewModel
             {
-                Items = new List<ChatMessageListItemViewModel>
+                Items = new ObservableCollection<ChatMessageListItemViewModel>
                 {
                     new ChatMessageListItemViewModel
                     {
@@ -146,6 +147,10 @@ namespace SunnyLize.Word.Core
                       new ChatMessageListItemViewModel
                     {
                         Message = "A recieve message",
+                        ImageAttachment = new ChatMessageListItemImageAttachmentViewModel
+                        {
+                          ThumbnailUrl = "http//anywhere"
+                        },
                         Initials = Initials,
                         MessageSentTime = DateTime.UtcNow,
                         ProfilePictureRGB = "FF0000",

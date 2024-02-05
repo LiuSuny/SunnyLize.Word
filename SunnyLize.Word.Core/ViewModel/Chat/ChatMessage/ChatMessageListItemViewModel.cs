@@ -56,5 +56,26 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public DateTimeOffset MessageSentTime { get; set; }
 
+        /// <summary>
+        /// A flag indicating if this items was added since the first main list of item is created
+        /// used as a fag to animating in
+        /// </summary>
+        public bool NewItem { get; set; }
+
+        /// <summary>
+        /// the attachment message, if it is off image type 
+        /// </summary>
+        public ChatMessageListItemImageAttachmentViewModel ImageAttachment { get; set; }
+
+        /// <summary>
+        /// a flag indicating if we have any message text or not
+        /// </summary>
+        public bool HasMessage => Message != null;
+
+        /// <summary>
+        /// a flag indicating if we have any image attached to this message or not
+        /// </summary>
+        public bool HasImageAttachment => ImageAttachment != null;
+
     }
 }

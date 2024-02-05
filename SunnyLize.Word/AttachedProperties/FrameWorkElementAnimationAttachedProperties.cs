@@ -63,7 +63,7 @@ namespace SunnyLize.Word
                 mAlreadyLoaded[sender] = false;
 
                  //if we are to animate initially
-                if (!(bool)value) //animate out by default so animate in
+                //if (!(bool)value) //animate out by default so animate in
                 //start off hidded animation untill we decide how to animate                
                 element.Visibility = Visibility.Hidden;
 
@@ -168,6 +168,21 @@ namespace SunnyLize.Word
         }
     }
 
+
+    /// <summary>
+    /// Animate a framework element sliding up from the bottom on load 
+    /// if the value is true
+    /// </summary>
+    public class AnimateSlideInFromBottomOnLoadProperty : AnimateBaseProperty<AnimateSlideInFromBottomOnLoadProperty>
+    {
+        //protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
+        {
+           
+            await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, !value, !value ? 0 : 0.3f, keepMargin: false);
+           
+        }
+    }
 
     /// <summary>
     /// Animate a framework element sliding up from the bottom show 

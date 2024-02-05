@@ -63,6 +63,9 @@ namespace SunnyLize.Word
                 //otherwise update the value
                 mViewModel = value;
 
+                //Once our view model is updated fire the view model change
+                OnviewModelChange();
+
                 //set our datacontext to viewmodel on this page
                 this.DataContext = mViewModel;
             }
@@ -160,8 +163,13 @@ namespace SunnyLize.Word
         }
         #endregion
 
+        /// <summary>
+        /// Fire when the view model changes
+        /// </summary>
+        protected virtual void OnviewModelChange()
+        {
 
-
+        }
 
     }
 

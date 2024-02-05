@@ -8,6 +8,7 @@
       mc:Ignorable="d" 
        x:Name="Page"
       d:DesignHeight="700" d:DesignWidth="700"
+      d:DataContext="{x:Static core:ChatMessageListDesignModel.Instance}"
       >
     
     <Grid>
@@ -69,19 +70,23 @@
         
         
         <!--ChatList-->
-        <local:ChatMessageListControl Grid.Row="1"
+        <local:ChatMessageListControl
+                                     x:Name="ChatMessageList"
+                                     Grid.Row="1"
                                       DataContext="{Binding}"
                                       />
         
         <!--Attache menu popup-->
-        <local:BubbleContent 
+        <Border        
             Grid.Row="1"
-            Panel.ZIndex="2"
-            DataContext="{Binding AttachmentMenu}"
+            Panel.ZIndex="2"           
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
-            local:AnimateSlideInFromBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ChatPage}}}"
-            />
+            local:AnimateSlideInFromBottomProperty.Value="{Binding AttachmentMenuVisible}"           
+            >
+            <local:BubbleContent DataContext="{Binding AttachmentMenu}"/>
+        </Border>
+            
         
         
         <!--Message sent text //Text chat box with messages, attached file icon with emoji--> 
@@ -113,16 +118,20 @@
                     Foreground="{StaticResource ForegroundDarkBrush}"
                     />
 
-            <!--Message chat Box-->
-            <TextBox Grid.Column="1"
+            <!--Message chat Box (AcceptsReturn="True")help our text to jump to new line-->
+            <TextBox x:Name="MessageText"
+                     Grid.Column="1"
+                     local:IsFocusProperty.Value="True"
+                     Text="{Binding PendingMessageText, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      FontSize="{StaticResource FontSizeRegular}"
                      Tag="Write a message..."
                      BorderThickness="0"
-                     Padding="0 10 10 10"
+                     Padding="0 10 10 10"   
                      AcceptsReturn="True"
                      AcceptsTab="True"
                      VerticalScrollBarVisibility="Auto"
+                     PreviewKeyDown ="MessageText_PreviewKeyDown"
                      />
             <!--Additional box like the send an emoji-->
             <StackPanel  Grid.Column="2"
@@ -139,11 +148,14 @@
                     />
                 
                 <!--Send button-->
-                <Button Content="Send"
-                        Command="{Binding SendCommand}"
-                        Background="{StaticResource WordGreenBrush}"
+                <Button Content="Send" 
                         Padding="8"
+                        Focusable="False"
+                        IsDefault="True"
+                        Command="{Binding SendCommand}"
+                        Background="{StaticResource WordGreenBrush}"                       
                         FontSize="{StaticResource FontSizeRegular}"
+                       
                         />
             </StackPanel>
         </Grid>

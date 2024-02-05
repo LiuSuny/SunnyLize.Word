@@ -1,6 +1,7 @@
 ﻿using SunnyLize.Word.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace SunnyLize.Word.Core
@@ -14,7 +15,7 @@ namespace SunnyLize.Word.Core
         /// <summary>
         /// The chat message list items for the list
         /// </summary>
-        public List<ChatMessageListItemViewModel> Items { get; set; }
+        public ObservableCollection<ChatMessageListItemViewModel> Items { get; set; }
 
 
         /// <summary>
@@ -31,7 +32,12 @@ namespace SunnyLize.Word.Core
         /// View model for the attachment menu
         /// </summary>
         public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
-      
+
+
+        /// <summary>
+        /// The text for the current message been written
+        /// </summary>
+        public string PendingMessageText { get; set; }
         #endregion
 
         #region Public Command
@@ -93,20 +99,36 @@ namespace SunnyLize.Word.Core
         /// <summary>
         /// When the user Click send button message area is clicked
         /// </summary>
-        public /*async*/ void Send()
+        public void Send()
         {
 
 
-            //this UI independent as the core has no idea as we can invoke the UI function
-            /* await*/
-            IOCContainer.UI.ShowMessage(new MessageBoxDialogViewModel
-            {
-                Title = "Send Message",
-                Message = "Thank you for writing a nice message :)",
-                OkText = "OK"
-            });
+            ////this UI independent as the core has no idea as we can invoke the UI function
+            ///* await*/
+            //IOCContainer.UI.ShowMessage(new MessageBoxDialogViewModel
+            //{
+            //    Title = "Send Message",
+            //    Message = "Thank you for writing a nice message :)",
+            //    OkText = "OK"
+            //});
 
             //var ss = true;
+
+            if (Items == null)
+                Items = new ObservableCollection<ChatMessageListItemViewModel>();
+            //Fake send new message
+            Items.Add(new ChatMessageListItemViewModel
+            {
+                Initials = "LM",
+                Message = PendingMessageText,
+                MessageSentTime = DateTime.UtcNow,
+                SentByMe = true,
+                SenderName = "John Sunglas",
+                NewItem = true,
+            }) ;
+
+            //Clear the pending message text
+            PendingMessageText = string.Empty;
 
         }
 
