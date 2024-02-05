@@ -77,5 +77,7 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public bool HasImageAttachment => ImageAttachment != null;
 
+        
+
     }
 }

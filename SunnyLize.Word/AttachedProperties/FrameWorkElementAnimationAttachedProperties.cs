@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 namespace SunnyLize.Word
@@ -120,7 +121,31 @@ namespace SunnyLize.Word
         protected virtual void DoAnimation(FrameworkElement element, bool value, bool firstLoad) { }
     }
 
+    /// <summary>
+    /// Fade in an image once the source changes
+    /// </summary>
+    public class FadeInImageOnLoadProperty :AnimateBaseProperty<FadeInImageOnLoadProperty>
+    {
+        public override void OnvalueUpdated(DependencyObject sender, object value)
+        {
+            //make sure we have an image
+            if (!(sender is Image image))
+                return;
 
+            //if the value pass in is true image then we animate in
+            if((bool)value)
+                image.TargetUpdated += Image_TargetUpdatedAsync;
+            else
+                image.TargetUpdated -= Image_TargetUpdatedAsync;
+        }
+
+        private async void Image_TargetUpdatedAsync(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+
+            //Fade in image
+            await (sender as Image).FadeInAsync(false);
+        }
+    }
 
     /// <summary>
     /// Animate a framework element sliding in from the left show 

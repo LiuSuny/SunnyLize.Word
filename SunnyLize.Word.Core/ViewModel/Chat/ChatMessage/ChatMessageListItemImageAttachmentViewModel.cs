@@ -65,5 +65,10 @@ namespace SunnyLize.Word.Core
         /// This is the local file path on these machine to download thumbnail
         /// </summary>
         public string LocalFilePath { get; set; }
+
+        /// <summary>
+        /// Indicate if our image has loaded
+        /// </summary>
+        public bool ImageLoad => LocalFilePath != null;
     }
 }
