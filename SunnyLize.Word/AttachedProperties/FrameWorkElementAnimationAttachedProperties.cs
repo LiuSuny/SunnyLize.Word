@@ -169,6 +169,50 @@ namespace SunnyLize.Word
         }
     }
 
+    /// <summary>
+    /// Animate a framework element sliding in from the right show 
+    /// and slide out to the right on hide
+    /// </summary>
+    public class AnimateSlideInFromRightProperty : AnimateBaseProperty<AnimateSlideInFromRightProperty>
+    {
+        // protected override async void DoAnimation(FrameworkElement element, bool value) 
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
+        {
+            if (value)
+                //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
+                //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
+                //await element.SlideAndFadeInAsync(firstLoad ? 0 : 0.3f, keepMargin:false);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Right, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
+            else
+                //otherwise animate out
+                //await element.SlideAndFadeOutToLeft(firstLoad ? 0 : 0.3f, keepMargin:false);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, firstLoad ? 0 : 0.3f, keepMargin: false);
+
+        }
+    }
+
+
+    /// <summary>
+    /// Animate a framework element sliding in from the right show 
+    /// and slide out to the right on hide
+    /// </summary>
+    public class AnimateSlideInFromRightMarginProperty : AnimateBaseProperty<AnimateSlideInFromRightMarginProperty>
+    {
+        // protected override async void DoAnimation(FrameworkElement element, bool value) 
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
+        {
+            if (value)
+                //Animate in---///FirstLoad ? 0 : 0.3f if it firstload do nothing otherwise animate the same
+                //FirstLoad ? 0.3f : 0.3f will allow our both pages to load at the same time
+                //await element.SlideAndFadeInAsync(firstLoad ? 0 : 0.3f, keepMargin:false);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Right, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: true);
+            else
+                //otherwise animate out
+                //await element.SlideAndFadeOutToLeft(firstLoad ? 0 : 0.3f, keepMargin:false);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, firstLoad ? 0 : 0.3f, keepMargin: true);
+
+        }
+    }
 
 
     /// <summary>

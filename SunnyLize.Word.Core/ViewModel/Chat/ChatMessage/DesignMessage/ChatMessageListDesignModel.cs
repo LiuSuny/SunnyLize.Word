@@ -27,12 +27,13 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public ChatMessageListDesignModel()
         {
+            DisplayTitle = "Parnell";
             Items = new ObservableCollection<ChatMessageListItemViewModel>
-            {
+            {              
 
                  new ChatMessageListItemViewModel
                {
-                  SenderName = "Parnel",
+                  SenderName = "Parnell",
                    Initials = "PL",
                    Message = "I'm about to wipe out the old server, we need to update the old server to window 2024",
                   ProfilePictureRGB = "00d405",

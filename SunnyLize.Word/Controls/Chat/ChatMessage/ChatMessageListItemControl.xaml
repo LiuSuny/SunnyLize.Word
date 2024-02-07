@@ -77,6 +77,7 @@
                         
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        
                     </Grid.RowDefinitions>
                       
                     <!--Image loading Glyph spining icon-->
@@ -113,6 +114,7 @@
 
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <!--Speech bubble rectange-->
                         <Border CornerRadius="10"
@@ -137,20 +139,17 @@
                               StrokeThickness="0"
                               HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeAlignmentConverter}}"
                               Fill="{Binding SentByMe, Converter={local:SentByMeToBackgroundConverter}}"  />
-                    </Grid>
 
-                </Grid>
-                
-                
-                <!--Time Container-->
-                <StackPanel Name="ExtraDetails" 
+
+                        <!--Time Container-->
+                        <StackPanel Name="ExtraDetails" 
                             Grid.Row="2"  
                             Opacity="0"
                             HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeAlignmentConverter}, ConverterParameter=True}"
                             Orientation="Horizontal"
                             >
-                    <!--Add message sent time -->
-                    <TextBlock                         
+                            <!--Add message sent time -->
+                            <TextBlock                         
                           Text="{Binding MessageSentTime, Converter={local:TimeToDisplayTimeConverter}}"
                            Foreground="{StaticResource ForegroundLightBrush}"                      
                            FontSize="{StaticResource FontSizeSmall}" 
@@ -158,15 +157,22 @@
                            Margin="0 0 15 0"
                            />
 
-                    <!--Add message read time -->
-                    <TextBlock  
+                            <!--Add message read time -->
+                            <TextBlock  
                         
                           Text="{Binding MessageReadTime, Converter={local:TimeToReadMessageTimeConverter}}"
                            Foreground="{StaticResource WordDarkBlueBrush}"                      
                            FontSize="{StaticResource FontSizeSmall}" 
                            FontFamily="{StaticResource LatoRegular}"                      
                            />
-                </StackPanel>
+                        </StackPanel>
+
+                    </Grid>
+
+                </Grid>
+                
+                
+              
             </Grid>
         </Grid>
     </Border>
