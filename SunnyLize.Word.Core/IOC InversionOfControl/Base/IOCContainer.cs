@@ -25,6 +25,23 @@ namespace SunnyLize.Word.Core
         /// </summary>
         public static IUIManager UI => IOCContainer.Get<IUIManager>(); //just a sort of shortcut to reach the IUIManager
 
+
+        /// <summary>
+        /// shortcut to access the <see cref="ILogFactory"/>
+        /// </summary>
+        public static ILogFactory Logger => IOCContainer.Get<ILogFactory>(); //just a sort of shortcut to reach the IUIManager
+
+
+        /// <summary>
+        /// shortcut to access the <see cref="IFileManager"/>
+        /// </summary>
+        public static IFileManager file => IOCContainer.Get<IFileManager>(); //just a sort of shortcut to reach the IFileManager
+
+        /// <summary>
+        /// shortcut to access the <see cref="ITaskManager"/>
+        /// </summary>
+        public static ITaskManager Task => IOCContainer.Get<ITaskManager>(); //just a sort of shortcut to reach the IUIManager
+
         /// <summary>
         /// shortcut allow us access for shortcut the <see cref="ApplicationViewModel"/>
         /// </summary>

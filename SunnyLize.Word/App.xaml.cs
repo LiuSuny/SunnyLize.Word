@@ -20,20 +20,40 @@ namespace SunnyLize.Word
         /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
-            //We are allowing the base appliaction do what it need
-            base.OnStartup(e);
+           
+            
+                //We are allowing the base appliaction do what it need
+                base.OnStartup(e);
 
 
-            //Setup the main application
-            ApplicationSetUp();
+                //Setup the main application
+                ApplicationSetUp();
 
+                //Log it
+                IOCContainer.Logger.Log("This is debug...", LogLevel.Debug);
+            //IOCContainer.Logger.Log("This is verbose...", LogLevel.Verbose);
+            //IOCContainer.Logger.Log("This is informative...", LogLevel.Informative);
+            //IOCContainer.Logger.Log("This is warning...", LogLevel.Warning);
+            //IOCContainer.Logger.Log("This is error...", LogLevel.Error);
+            //IOCContainer.Logger.Log("This is success...", LogLevel.Success);
+
+            //IOCContainer.file.WriteAllTextToFileAsync("Some text", "test.txt");
 
             ////Setup ioc
             //IOCContainer.SetUp();
 
-            //Next we show the main window
-            Current.MainWindow = new MainWindow();
-            Current.MainWindow.Show();
+            //Adding our logger to file using task manager
+            //IOCContainer.Task.Run(() =>
+            //{
+            //    throw new ArgumentNullException("ooops");
+            //});
+
+
+                //Next we show the main window
+                Current.MainWindow = new MainWindow();
+                Current.MainWindow.Show();
+            
+            
         }
 
         /// <summary>
@@ -44,10 +64,24 @@ namespace SunnyLize.Word
             ////Setup ioc
             IOCContainer.SetUp();
 
+            //Bind a Logger
+            IOCContainer.kernel.Bind<ILogFactory>().ToConstant(new BaseLogFactory(new[] 
+            {
+                //TODO: Add ApplicationSettings so we can set/edit a log location
+
+                //       for now we just log to the path where application is running
+                new FileLogger("log.txt")
+            }));
+
+            //Add our task manager
+            IOCContainer.kernel.Bind<ITaskManager>().ToConstant(new TaskManager());
+            //Bind a file manager
+            IOCContainer.kernel.Bind<IFileManager>().ToConstant(new FileManager());
+
             //Bind the UI manager
             // IOCContainer.kernel.Bind<IUIManager>().ToSelf();
-
             IOCContainer.kernel.Bind<IUIManager>().ToConstant(new UIManager());
+
         }
     }
 }

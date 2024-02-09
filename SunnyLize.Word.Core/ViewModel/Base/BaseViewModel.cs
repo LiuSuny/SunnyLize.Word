@@ -58,9 +58,10 @@ namespace SunnyLize.Word.Core
             }
         }
 
-        private class ImplementPropertyChangedAttribute : Attribute  {
+        private class ImplementPropertyChangedAttribute : Attribute
+        {
         }
-      
+
         #endregion
     }
 }
